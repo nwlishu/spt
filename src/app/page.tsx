@@ -14,7 +14,6 @@ const Navbar = () => {
     <>
       <div>
         <Hero />
-        {/* <Hero1 /> */}
         <Quote />
         <Category />
         <ProductShowcase />
