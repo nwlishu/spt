@@ -552,14 +552,28 @@
 
 // export default AboutUsPage;
 
-import React from 'react';
-import { Calendar, Users, Target, Award, Wrench, Droplets } from 'lucide-react';
+import React from "react";
+import { Calendar, Users, Target, Award, Wrench, Droplets } from "lucide-react";
 
 const AboutUs: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#21286E]">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-28 ">
+          <div className="text-center mb-6 sm:mb-10">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffff]">
+              Get In Touch
+            </h1>
+            <p className="text-white text-lg mt-2 sm:mt-3 max-w-2xl mx-auto">
+              Ready to transform your lawn? Contact us for expert advice,
+              product information, or to schedule a service appointment.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      {/* <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             About S.P.T. Part Trading
@@ -569,7 +583,7 @@ const AboutUs: React.FC = () => {
             agricultural equipment parts and solutions for over 30 years.
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* Company Stats */}
       <section className="py-12 bg-white">
@@ -605,7 +619,8 @@ const AboutUs: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
             <p className="text-lg text-gray-600">
-              From humble beginnings to Thailand&apos;s leading agricultural parts specialist
+              From humble beginnings to Thailand&apos;s leading agricultural
+              parts specialist
             </p>
           </div>
 
@@ -618,12 +633,15 @@ const AboutUs: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">Humble Beginnings</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Humble Beginnings
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  T. Thaweekij began as a small family business, started by one determined man who 
-                  worked tirelessly to support his family. Through perseverance and dedication, 
-                  what started as a means of survival gradually grew into a specialized business 
-                  serving the agricultural community.
+                  T. Thaweekij began as a small family business, started by one
+                  determined man who worked tirelessly to support his family.
+                  Through perseverance and dedication, what started as a means
+                  of survival gradually grew into a specialized business serving
+                  the agricultural community.
                 </p>
               </div>
             </div>
@@ -636,12 +654,15 @@ const AboutUs: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">Building Trust & Reputation</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  Building Trust & Reputation
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  With over 30 years of experience, honesty, and integrity as our core values, 
-                  T. Thaweekij earned the trust of customers nationwide. Our commitment to quality 
-                  products at fair prices, combined with sincere and friendly service, built 
-                  strong relationships with over 700 customers across Thailand.
+                  With over 30 years of experience, honesty, and integrity as
+                  our core values, T. Thaweekij earned the trust of customers
+                  nationwide. Our commitment to quality products at fair prices,
+                  combined with sincere and friendly service, built strong
+                  relationships with over 700 customers across Thailand.
                 </p>
               </div>
             </div>
@@ -654,12 +675,15 @@ const AboutUs: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">The Doraemon Reputation</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  The Doraemon Reputation
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Our comprehensive sourcing capabilities earned us the nickname Doraemon of 
-                  Agricultural Parts. We became known for finding and supplying parts that 
-                  others couldn&apos;t - from grass cutter parts and water pump components to chainsaw 
-                  parts, seals, and countless other agricultural equipment needs.
+                  Our comprehensive sourcing capabilities earned us the nickname
+                  Doraemon of Agricultural Parts. We became known for finding
+                  and supplying parts that others couldn&apos;t - from grass
+                  cutter parts and water pump components to chainsaw parts,
+                  seals, and countless other agricultural equipment needs.
                 </p>
               </div>
             </div>
@@ -672,12 +696,16 @@ const AboutUs: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">New Generation, Same Values</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  New Generation, Same Values
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  T. Thaweekij has evolved into S.P.T. Part Trading Company Limited under 
-                  the new generation&apos;s leadership. With knowledge effectively transferred from 
-                  parent to child, we continue to uphold our founding principles while embracing 
-                  modern business practices to serve our customers better than ever.
+                  T. Thaweekij has evolved into S.P.T. Part Trading Company
+                  Limited under the new generation&apos;s leadership. With
+                  knowledge effectively transferred from parent to child, we
+                  continue to uphold our founding principles while embracing
+                  modern business practices to serve our customers better than
+                  ever.
                 </p>
               </div>
             </div>
@@ -689,10 +717,13 @@ const AboutUs: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Specialties</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Our Specialties
+            </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We import and distribute a comprehensive range of agricultural equipment parts, 
-              providing complete sourcing solutions for all your needs.
+              We import and distribute a comprehensive range of agricultural
+              equipment parts, providing complete sourcing solutions for all
+              your needs.
             </p>
           </div>
 
@@ -701,30 +732,39 @@ const AboutUs: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Wrench className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Grass Cutter Parts</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Grass Cutter Parts
+              </h3>
               <p className="text-gray-600">
-                Complete range of grass cutter and mower parts from leading manufacturers, 
-                ensuring your equipment runs smoothly and efficiently.
+                Complete range of grass cutter and mower parts from leading
+                manufacturers, ensuring your equipment runs smoothly and
+                efficiently.
               </p>
             </div>
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Droplets className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Water Pump Components</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Water Pump Components
+              </h3>
               <p className="text-gray-600">
-                High-quality water pump parts and accessories for agricultural irrigation 
-                systems, maintaining optimal water flow for your operations.
+                High-quality water pump parts and accessories for agricultural
+                irrigation systems, maintaining optimal water flow for your
+                operations.
               </p>
             </div>
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Target className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Comprehensive Solutions</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Comprehensive Solutions
+              </h3>
               <p className="text-gray-600">
-                Chainsaw parts, seals, and countless other agricultural equipment components. 
-                If others don&apos;t have it, we&apos;ll source it for you.
+                Chainsaw parts, seals, and countless other agricultural
+                equipment components. If others don&apos;t have it, we&apos;ll
+                source it for you.
               </p>
             </div>
           </div>
@@ -735,10 +775,12 @@ const AboutUs: React.FC = () => {
       <section className="py-16 bg-green-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Core Values</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Our Core Values
+            </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              These principles have guided us for over 30 years and continue to shape 
-              everything we do today.
+              These principles have guided us for over 30 years and continue to
+              shape everything we do today.
             </p>
           </div>
 
@@ -747,30 +789,39 @@ const AboutUs: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Award className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Honesty & Integrity</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Honesty & Integrity
+              </h3>
               <p className="text-gray-600">
-                Our foundation is built on honesty and integrity - the motto that has earned 
-                us the trust of over 700 customers nationwide for three decades.
+                Our foundation is built on honesty and integrity - the motto
+                that has earned us the trust of over 700 customers nationwide
+                for three decades.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Target className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Quality Assurance</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Quality Assurance
+              </h3>
               <p className="text-gray-600">
-                We carefully select and curate high-quality products at fair prices, 
-                ensuring every customer receives exceptional value for their investment.
+                We carefully select and curate high-quality products at fair
+                prices, ensuring every customer receives exceptional value for
+                their investment.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Users className="h-6 w-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Sincere Service</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Sincere Service
+              </h3>
               <p className="text-gray-600">
-                Our friendly and sincere service approach creates lasting relationships 
-                built on trust, understanding, and genuine care for our customers&apos; success.
+                Our friendly and sincere service approach creates lasting
+                relationships built on trust, understanding, and genuine care
+                for our customers&apos; success.
               </p>
             </div>
           </div>
@@ -780,10 +831,13 @@ const AboutUs: React.FC = () => {
       {/* CTA Section */}
       <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-4">Your Agricultural Parts Solution</h2>
+          <h2 className="text-3xl font-bold mb-4">
+            Your Agricultural Parts Solution
+          </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join over 700 satisfied customers who trust us as their &quot;Doraemon of Agricultural Parts.&quot; 
-            Let us help you find exactly what you need.
+            Join over 700 satisfied customers who trust us as their
+            &quot;Doraemon of Agricultural Parts.&quot; Let us help you find
+            exactly what you need.
           </p>
           <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
             Contact Us Today

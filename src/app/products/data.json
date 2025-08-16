@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "image": "/กรองน้ำมัน/NB411/IMG_0173.JPG",
+        "image": "https://sptpart-bucket.s3.ap-southeast-1.amazonaws.com/image/test/IMG_0173.JPG",
         "title": "กรองก็อกน้ำมัน NB411",
         "description": "กรองน้ำมัน",
         "price": 19,

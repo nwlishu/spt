@@ -70,9 +70,11 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Contact Button */}
-        <button className="hidden lg:block bg-indigo-900 text-white px-6 py-2 rounded-full hover:bg-indigo-800 transition-colors">
-          ติดต่อเรา
-        </button>
+        <Link href="/contact">
+          <button className="hidden lg:block bg-indigo-900 text-white px-6 py-2 rounded-full hover:bg-indigo-800 transition-colors">
+            ติดต่อเรา
+          </button>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button

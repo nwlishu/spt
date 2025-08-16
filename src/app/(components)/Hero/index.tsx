@@ -7,7 +7,9 @@ const HeroSection: React.FC = () => {
     <section className="relative mt-21 mx-4 md:mx-18 overflow-hidden">
       <motion.div
         className="absolute rounded-xl inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{ backgroundImage: `url('/herograss.png')` }}
+        style={{
+          backgroundImage: `url('https://sptpart-bucket.s3.ap-southeast-1.amazonaws.com/image/home/herograss.png')`,
+        }}
       >
         {/* Dark overlay for better text readability */}
         <motion.div
