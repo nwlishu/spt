@@ -34,11 +34,6 @@ interface ProductCardProps {
   imagePath?: string;
 }
 
-// interface FeatureProps {
-//   title: string;
-//   description: string;
-// }
-
 const ProductCard: React.FC<ProductCardProps> = ({
   title,
   subtitle,
@@ -82,49 +77,27 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-// const FeatureCard: React.FC<FeatureProps> = ({ title, description }) => {
-//   return (
-//     <div className="space-y-3">
-//       <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-//       <p className="text-gray-700 text-sm leading-relaxed">{description}</p>
-//     </div>
-//   );
-// };
-
 const ProductShowcase: React.FC = () => {
   const products: ProductCardProps[] = [
     {
       title: "เฟืองเดือยหัวเกียร์ G4K หัวเหลี่ยม",
       subtitle: "แกนเพลาหัวเกียร์/เฟืองเดือยหัวเกียร์",
       price: "550 THB",
-      imagePath: "/G4K.jpg", // Add your actual image path
+      imagePath: "/G4K.webp",
     },
     {
       title: "ถังน้ำมัน+ฝา UMK435 ถังล่าง",
       subtitle: "ถังน้ำมัน/เฉพาะฝาถังน้ำมัน",
       price: "190 THB",
-      imagePath: "/P7262969.jpg", // Add your actual image path
+      imagePath: "/P7262969.webp",
     },
     {
       title: "สปริงคลัชผ้า NB411 ขาเหล็ก",
       subtitle: "คลัชผ้า/เฉพาะสปริงคลัชผ้า/สกรูยึดคลัชผ้า",
       price: "9 THB",
-      imagePath: "/NB411-1.jpg", // Add your actual image path
+      imagePath: "/NB411-1.webp",
     },
   ];
-
-  // const features: FeatureProps[] = [
-  //   {
-  //     title: "สาธารณะและเครื่องจักร",
-  //     description:
-  //       "พบกับผลิตภัณฑ์ที่ให้สนุบมตรฐาน ISO และ GMP เพื่อร่วงง์กับทำนดสถานปฏิบัติการมีลองของคุณ",
-  //   },
-  //   {
-  //     title: "การรับประกันคุณภาพ",
-  //     description:
-  //       "เราให้บริการดัดเล่าที่มี่อใจได้ในองเรา เพื่อร่งมั่นใจอาบดำเนินการสิ่งส่งมัดเดิอสนองคุณ",
-  //   },
-  // ];
 
   return (
     <section className="py-20 bg-white">
