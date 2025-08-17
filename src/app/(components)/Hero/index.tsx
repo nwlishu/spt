@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
           <div className=" p-8">
             {/* Company Name */}
             <motion.h1
-              className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+              className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.9 }}
@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
               <br />
               เทรดดิ้ง จำกัด (ร้านต.ทวีกิจ)
               <br />
-              <span className="text-4xl lg:text-5xl">
+              <span className="text-3xl lg:text-5xl">
                 SPT PART TRADING CO.,LTD.
               </span>
             </motion.h1>
