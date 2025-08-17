@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useMemo, useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import data from "./data.json";
-import { useRouter, useSearchParams } from "next/navigation";
-
 
 type Product = {
   id: number;
@@ -53,99 +57,93 @@ const categories: string[] = [
 const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
 
 export default function ProductsPage() {
- const [selectedCategory, setSelectedCategory] = useState<string>("All");
-const [search, setSearch] = useState("");
-const pageSize = 9;
-const [isCatOpen, setIsCatOpen] = useState(false);
-const [categoryQuery, setCategoryQuery] = useState("");
-const catRef = useRef<HTMLDivElement | null>(null);
-const router = useRouter();
-const searchParams = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [search, setSearch] = useState("");
+  const pageSize = 9;
+  const [isCatOpen, setIsCatOpen] = useState(false);
+  const [categoryQuery, setCategoryQuery] = useState("");
+  const catRef = useRef<HTMLDivElement | null>(null);
 
-// 1️⃣ Initialize currentPage from URL
-const initialPage = parseInt(searchParams.get("page") || "1", 10);
-const [currentPage, setCurrentPage] = useState(initialPage);
+  // Pagination state (local only)
+  const [currentPage, setCurrentPage] = useState(1);
 
-// Close dropdown on outside click
-useEffect(() => {
-  const onDown = (e: MouseEvent) => {
-    if (!catRef.current) return;
-    if (!catRef.current.contains(e.target as Node)) setIsCatOpen(false);
+  // Close dropdown on outside click
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!catRef.current) return;
+      if (!catRef.current.contains(e.target as Node)) setIsCatOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  // Filter categories
+  const filteredCategories = useMemo(() => {
+    const q = categoryQuery.trim().toLowerCase();
+    return categories.filter((c) => c.toLowerCase().includes(q));
+  }, [categoryQuery]);
+
+  // Filter products
+  const filtered = useMemo(() => {
+    return allProducts.filter((p) => {
+      const matchCat =
+        selectedCategory === "All" || p.category === selectedCategory;
+      const term = search.trim().toLowerCase();
+      const matchSearch =
+        !term ||
+        p.title.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term);
+      return matchCat && matchSearch;
+    });
+  }, [selectedCategory, search]);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, search]);
+
+  // Pagination calculations
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const safePage = Math.min(currentPage, totalPages);
+
+  const paginated = useMemo(() => {
+    const start = (safePage - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, safePage, pageSize]);
+
+  const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
+  const endItem = Math.min(filtered.length, safePage * pageSize);
+
+  // Go to page
+  const goToPage = useCallback(
+    (page: number) => {
+      if (page < 1) page = 1;
+      if (page > totalPages) page = totalPages;
+      setCurrentPage(page);
+    },
+    [totalPages]
+  );
+
+  // Pagination numbers
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    const delta = 1;
+    const left = Math.max(2, safePage - delta);
+    const right = Math.min(totalPages - 1, safePage + delta);
+
+    pages.push(1);
+    if (left > 2) pages.push("...");
+    for (let i = left; i <= right; i++) pages.push(i);
+    if (right < totalPages - 1) pages.push("...");
+    if (totalPages > 1) pages.push(totalPages);
+    return pages;
   };
-  document.addEventListener("mousedown", onDown);
-  return () => document.removeEventListener("mousedown", onDown);
-}, []);
-
-// Filter categories
-const filteredCategories = useMemo(() => {
-  const q = categoryQuery.trim().toLowerCase();
-  return categories.filter((c) => c.toLowerCase().includes(q));
-}, [categoryQuery]);
-
-// Filter products
-const filtered = useMemo(() => {
-  return allProducts.filter((p) => {
-    const matchCat = selectedCategory === "All" || p.category === selectedCategory;
-    const term = search.trim().toLowerCase();
-    const matchSearch = !term || p.title.toLowerCase().includes(term) || p.description.toLowerCase().includes(term);
-    return matchCat && matchSearch;
-  });
-}, [selectedCategory, search]);
-
-// 2️⃣ Update currentPage when filters change
-useEffect(() => {
-  setCurrentPage(1);
-  const params = new URLSearchParams(window.location.search);
-  params.set("page", "1");
-  router.replace(`${window.location.pathname}?${params.toString()}`);
-}, [selectedCategory, search, router]);
-
-// // 3️⃣ Keep currentPage in sync with URL (back/forward navigation)
-// useEffect(() => {
-//   const urlPage = parseInt(searchParams.get("page") || "1", 10);
-//   if (urlPage !== currentPage) {
-//     setCurrentPage(urlPage);
-//   }
-// }, [searchParams, currentPage]);
-
-const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-const safePage = Math.min(currentPage, totalPages);
-
-// Paginate
-const paginated = useMemo(() => {
-  const start = (safePage - 1) * pageSize;
-  return filtered.slice(start, start + pageSize);
-}, [filtered, safePage, pageSize]);
-
-const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
-const endItem = Math.min(filtered.length, safePage * pageSize);
-
-// Go to page
-const goToPage = useCallback((page: number) => {
-  if (page < 1) page = 1;
-  if (page > totalPages) page = totalPages;
-
-  setCurrentPage(page);
-
-  const params = new URLSearchParams(window.location.search);
-  params.set("page", page.toString());
-  router.replace(`${window.location.pathname}?${params.toString()}`);
-}, [router, totalPages]);
-
-// Pagination numbers
-const getPageNumbers = () => {
-  const pages: (number | string)[] = [];
-  const delta = 1; // neighbors around current
-  const left = Math.max(2, safePage - delta);
-  const right = Math.min(totalPages - 1, safePage + delta);
-
-  pages.push(1);
-  if (left > 2) pages.push("...");
-  for (let i = left; i <= right; i++) pages.push(i);
-  if (right < totalPages - 1) pages.push("...");
-  if (totalPages > 1) pages.push(totalPages);
-  return pages;
-};
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional: smooth scroll
+    });
+  }, [currentPage]);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -366,7 +364,10 @@ const getPageNumbers = () => {
                       {p}
                     </button>
                   ) : (
-                    <span key={idx} className="cursor-poniter px-2 text-gray-400 select-none">
+                    <span
+                      key={idx}
+                      className="cursor-poniter px-2 text-gray-400 select-none"
+                    >
                       {p}
                     </span>
                   )
