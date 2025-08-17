@@ -16,60 +16,9 @@ const ContactPage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen">
-        {/* Header */}
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  LawnMaster Pro
-                </h1>
-              </div>
-              <nav className="hidden md:flex space-x-8">
-                <a
-                  href="#"
-                  className="text-gray-600 hover:text-green-600 transition-colors"
-                >
-                  Home
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-600 hover:text-green-600 transition-colors"
-                >
-                  Products
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-600 hover:text-green-600 transition-colors"
-                >
-                  Services
-                </a>
-                <a href="#" className="text-green-600 font-medium">
-                  Contact
-                </a>
-              </nav>
-            </div>
-          </div>
-        </header>
-
+      <div className="min-h-screen my-24">
         {/* Page Header */}
-        <div className="bg-[#21286E]">
+        <div className="bg-[#21286E] md:px-8">
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-28 ">
             <div className="text-center mb-6 sm:mb-10">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffff]">
@@ -221,7 +170,7 @@ const ContactPage: React.FC = () => {
                 className="relative h-[400px] md:h-[650px]"
               >
                 <Image
-                  src="/map.png"
+                  src="/map.webp"
                   alt="Office Location Map"
                   fill
                   className="object-contain"

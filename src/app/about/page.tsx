@@ -553,59 +553,55 @@
 // export default AboutUsPage;
 
 import React from "react";
-import { Calendar, Users, Target, Award, Wrench, Droplets } from "lucide-react";
+import {
+  Calendar,
+  Users,
+  Target,
+  Award,
+  Wrench,
+  // Droplets,
+  Check,
+} from "lucide-react";
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white my-24">
       {/* Hero Section */}
       <div className="bg-[#21286E]">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-28 ">
           <div className="text-center mb-6 sm:mb-10">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffff]">
-              Get In Touch
+              เกี่ยวกับบริษัท บริษัท เอสพีที พาร์ท เทรดดิ้ง จำกัด
             </h1>
             <p className="text-white text-lg mt-2 sm:mt-3 max-w-2xl mx-auto">
-              Ready to transform your lawn? Contact us for expert advice,
-              product information, or to schedule a service appointment.
+              คู่ค้าที่คุณไว้วางใจ
+              สำหรับอะไหล่และโซลูชันอุปกรณ์เกษตรครบวงจรมากว่า 30 ปี
             </p>
           </div>
         </section>
       </div>
-
-      {/* <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            About S.P.T. Part Trading
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            The Doraemon of Agricultural Parts - Your trusted partner for comprehensive 
-            agricultural equipment parts and solutions for over 30 years.
-          </p>
-        </div>
-      </section> */}
 
       {/* Company Stats */}
       <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center">
-              <Calendar className="h-8 w-8 text-green-600 mb-2" />
+              <Calendar className="h-8 w-8 text-yellow-400/95 mb-2" />
               <div className="text-3xl font-bold text-gray-900">30+</div>
               <div className="text-gray-600">Years Experience</div>
             </div>
             <div className="flex flex-col items-center">
-              <Users className="h-8 w-8 text-green-600 mb-2" />
+              <Users className="h-8 w-8 text-yellow-400/95 mb-2" />
               <div className="text-3xl font-bold text-gray-900">700+</div>
               <div className="text-gray-600">Trusted Customers</div>
             </div>
             <div className="flex flex-col items-center">
-              <Wrench className="h-8 w-8 text-green-600 mb-2" />
+              <Wrench className="h-8 w-8 text-yellow-400/95 mb-2" />
               <div className="text-3xl font-bold text-gray-900">1000+</div>
               <div className="text-gray-600">Product Lines</div>
             </div>
             <div className="flex flex-col items-center">
-              <Target className="h-8 w-8 text-green-600 mb-2" />
+              <Target className="h-8 w-8 text-yellow-400/95 mb-2" />
               <div className="text-3xl font-bold text-gray-900">100%</div>
               <div className="text-gray-600">Customer Satisfaction</div>
             </div>
@@ -617,10 +613,14 @@ const AboutUs: React.FC = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              เรื่องราวและความเป็นมา
+            </h2>
             <p className="text-lg text-gray-600">
-              From humble beginnings to Thailand&apos;s leading agricultural
-              parts specialist
+              {/* From humble beginnings to Thailand&apos;s leading agricultural
+              parts specialist */}
+              จากจุดเริ่มต้นเล็กๆ
+              สู่ผู้เชี่ยวชาญชิ้นส่วนเกษตรอันดับหนึ่งของประเทศไทย
             </p>
           </div>
 
@@ -628,8 +628,8 @@ const AboutUs: React.FC = () => {
             {/* Timeline Item 1 */}
             <div className="flex flex-col md:flex-row items-start gap-6">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  1990s
+                <div className="w-16 h-16 bg-yellow-400/95 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <Check className="w-8 h-8" />
                 </div>
               </div>
               <div className="flex-1">
@@ -637,11 +637,11 @@ const AboutUs: React.FC = () => {
                   Humble Beginnings
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  T. Thaweekij began as a small family business, started by one
-                  determined man who worked tirelessly to support his family.
-                  Through perseverance and dedication, what started as a means
-                  of survival gradually grew into a specialized business serving
-                  the agricultural community.
+                  ต.ทวีกิจ เป็นผู้นำเข้าและจัดจำหน่ายอะไหล่ทางการเกษตร อาทิ
+                  อะไหล่เครื่องตัดหญ้า อะไหล่ปั๊มน้ำ อะไหล่เครื่องเลื่อย ซีล
+                  และอื่นๆ อีกมากมาย เรามีบริการจัดหาสินค้าให้ลูกค้าอย่างครบวงจร
+                  จนลูกค้าขนานนามเราว่าเป็น “โดราเอมอนแห่งวงการอะไหล่การเกษตร”
+                  สิ่งที่ผู้อื่นไม่มีเราจัดหาให้คุณลูกค้าได้เสมอ
                 </p>
               </div>
             </div>
@@ -649,8 +649,8 @@ const AboutUs: React.FC = () => {
             {/* Timeline Item 2 */}
             <div className="flex flex-col md:flex-row items-start gap-6">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  2000s
+                <div className="w-16 h-16 bg-yellow-400/95 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <Check className="w-8 h-8" />
                 </div>
               </div>
               <div className="flex-1">
@@ -658,11 +658,14 @@ const AboutUs: React.FC = () => {
                   Building Trust & Reputation
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  With over 30 years of experience, honesty, and integrity as
-                  our core values, T. Thaweekij earned the trust of customers
-                  nationwide. Our commitment to quality products at fair prices,
-                  combined with sincere and friendly service, built strong
-                  relationships with over 700 customers across Thailand.
+                  มากกว่า 30 ปีที่ ต.ทวีกิจ ได้เติบโตมาจนถึงทุกวันนี้
+                  เริ่มต้นจาก ชายคนหนึ่ง
+                  ที่กัดฟันหาเลี้ยงครอบครัวจนสามารถเปิดกิจการเป็นของตัวเองได้
+                  ด้วยประสบการณ์ที่ยาวนาน รวมกับความซื่อตรงและสุจริต
+                  ซึ่งเป็นคติของร้าน จึงทำให้ทุกวันนี้ ต.ทวีกิจ
+                  ได้รับความไว้วางใจจากลูกค้าทั่วประเทศกว่า 700 ราย
+                  ทั้งในเรื่องคุณภาพสินค้าที่คัดสรรมาอย่างดี ราคาที่เหมาะสม
+                  รวมถึงบริการด้วยความจริงใจและเป็นมิตร
                 </p>
               </div>
             </div>
@@ -670,29 +673,8 @@ const AboutUs: React.FC = () => {
             {/* Timeline Item 3 */}
             <div className="flex flex-col md:flex-row items-start gap-6">
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  2010s
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  The Doraemon Reputation
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Our comprehensive sourcing capabilities earned us the nickname
-                  Doraemon of Agricultural Parts. We became known for finding
-                  and supplying parts that others couldn&apos;t - from grass
-                  cutter parts and water pump components to chainsaw parts,
-                  seals, and countless other agricultural equipment needs.
-                </p>
-              </div>
-            </div>
-
-            {/* Timeline Item 4 */}
-            <div className="flex flex-col md:flex-row items-start gap-6">
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
-                  Today
+                <div className="w-16 h-16 bg-yellow-400/95 rounded-full flex items-center justify-center text-white">
+                  <Check className="w-8 h-8" />
                 </div>
               </div>
               <div className="flex-1">
@@ -700,12 +682,13 @@ const AboutUs: React.FC = () => {
                   New Generation, Same Values
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  T. Thaweekij has evolved into S.P.T. Part Trading Company
-                  Limited under the new generation&apos;s leadership. With
-                  knowledge effectively transferred from parent to child, we
-                  continue to uphold our founding principles while embracing
-                  modern business practices to serve our customers better than
-                  ever.
+                  ณ ปัจจุบัน ร้าน ต.ทวีกิจ ของรุ่นพ่อแม่ ได้ทำการจัดตั้งเป็น
+                  “บริษัท เอส พี ที พาร์ท เทรดดิ้ง จำกัด” ในรุ่นลูก
+                  โดยได้รับการถ่ายทอดความรู้อย่างมีประสิทธิภาพ
+                  เพื่อเข้ามาช่วยกันบริหารกิจการให้เติบโตต่อไป เราสัญญาจะยืนหยัด
+                  ยึดมั่น
+                  ในการเป็นผู้นำด้านอะไหล่การเกษตรเพื่อให้ลูกค้าทุกท่านได้สินค้าคุณภาพ
+                  รวมไปถึงบริการที่ น่าประทับใจต่อไปในอนาคต
                 </p>
               </div>
             </div>
@@ -714,16 +697,14 @@ const AboutUs: React.FC = () => {
       </section>
 
       {/* Products & Services */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Specialties
+            ความเชี่ยวชาญของเรา
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We import and distribute a comprehensive range of agricultural
-              equipment parts, providing complete sourcing solutions for all
-              your needs.
+              เรานำเข้าและจัดจำหน่ายอะไหล่อุปกรณ์การเกษตรครบวงจร พร้อมให้บริการโซลูชันการจัดหาแบบครบทุกความต้องการของคุณ
             </p>
           </div>
 
@@ -733,7 +714,7 @@ const AboutUs: React.FC = () => {
                 <Wrench className="h-6 w-6 text-green-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Grass Cutter Parts
+                อะไหล่เครื่องตัดหญ้า
               </h3>
               <p className="text-gray-600">
                 Complete range of grass cutter and mower parts from leading
@@ -769,10 +750,10 @@ const AboutUs: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section */}
-      <section className="py-16 bg-green-50">
+      <section className="py-16 bg-yellow-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -786,42 +767,41 @@ const AboutUs: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Award className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Award className="h-6 w-6 text-yellow-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Honesty & Integrity
+                ซื่อสัตย์และมีจรรยาบรรณ
               </h3>
               <p className="text-gray-600">
-                Our foundation is built on honesty and integrity - the motto
-                that has earned us the trust of over 700 customers nationwide
-                for three decades.
+                รากฐานของเราสร้างขึ้นบนความซื่อสัตย์และมีจรรยาบรรณ –
+                คติประจำใจที่ทำให้เราได้รับความไว้วางใจจากลูกค้ามากกว่า 700
+                รายทั่วประเทศ
               </p>
             </div>
             <div className="text-center p-6">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Target className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Target className="h-6 w-6 text-yellow-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Quality Assurance
+                การรับประกันคุณภาพ
               </h3>
               <p className="text-gray-600">
-                We carefully select and curate high-quality products at fair
-                prices, ensuring every customer receives exceptional value for
-                their investment.
+                เราคัดสรรและเลือกสินค้าที่มีคุณภาพสูงในราคาที่เหมาะสม
+                เพื่อให้ลูกค้าทุกท่านได้รับความคุ้มค่าสูงสุดจากการลงทุน
               </p>
             </div>
             <div className="text-center p-6">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="h-6 w-6 text-yellow-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Sincere Service
+                บริการจริงใจ
               </h3>
               <p className="text-gray-600">
-                Our friendly and sincere service approach creates lasting
-                relationships built on trust, understanding, and genuine care
-                for our customers&apos; success.
+                วิธีการให้บริการที่เป็นมิตรและจริงใจของเราช่วยสร้างความสัมพันธ์ที่ยั่งยืน
+                โดยตั้งอยู่บนพื้นฐานของความไว้วางใจ ความเข้าใจ
+                และความใส่ใจอย่างแท้จริงต่อความสำเร็จของลูกค้า
               </p>
             </div>
           </div>
@@ -829,17 +809,17 @@ const AboutUs: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gray-900 text-white">
+      <section className="py-16 bg-white-900 text-black">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-4">
             Your Agricultural Parts Solution
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Join over 700 satisfied customers who trust us as their
             &quot;Doraemon of Agricultural Parts.&quot; Let us help you find
             exactly what you need.
           </p>
-          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+          <button className="bg-yellow-400/95 hover:bg-yellow-400 text-black font-semibold py-3 px-8 rounded-lg transition duration-200">
             Contact Us Today
           </button>
         </div>

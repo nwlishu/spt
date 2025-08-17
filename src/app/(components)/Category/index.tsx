@@ -1,4 +1,3 @@
-// components/CategoriesSectionWithImages.tsx
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -12,7 +11,6 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
-  // number,
   title,
   image,
 }) => {

@@ -1,6 +1,6 @@
-// components/Quote.tsx
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 
 interface StatCardProps {
   label: string;
@@ -10,7 +10,13 @@ interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ label, value, description }) => {
   return (
-    <div className="text-center">
+    <motion.div
+      className="text-center"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="mb-6">
         <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mb-2">
           {label}
@@ -22,7 +28,7 @@ const StatCard: React.FC<StatCardProps> = ({ label, value, description }) => {
       <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
         {description}
       </p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -52,7 +58,13 @@ const Quote: React.FC = () => {
     <section className="bg-white py-24 px-18">
       <div className="container mx-auto max-w-full">
         {/* Main Quote Section */}
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#21286E] mb-12 tracking-tight leading-tight">
             Delivering the right parts, with quality you can rely on.
@@ -61,7 +73,6 @@ const Quote: React.FC = () => {
           {/* Quote */}
           <div className="max-w-5xl mx-auto">
             <div className="relative">
-              {/* Quote marks */}
               <div className="absolute -top-4 -left-4 text-6xl text-gray-200 font-serif">
                 &ldquo;
               </div>
@@ -77,10 +88,16 @@ const Quote: React.FC = () => {
               </blockquote>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Statistics Section */}
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-8 md:px-12 lg:px-16 rounded-3xl">
+        <motion.div
+          className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-8 md:px-12 lg:px-16 rounded-3xl"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             {stats.map((stat, index) => (
               <StatCard
@@ -91,14 +108,7 @@ const Quote: React.FC = () => {
               />
             ))}
           </div>
-        </div>
-
-        {/* Call to Action */}
-        {/* <div className="text-center mt-16">
-          <button className="bg-gray-900 text-white px-8 py-4 rounded-full hover:bg-gray-800 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
-            เรียนรู้เพิ่มเติม
-          </button>
-        </div> */}
+        </motion.div>
       </div>
     </section>
   );

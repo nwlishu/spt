@@ -119,12 +119,12 @@ export default function ProductDetailPage({
                 className="object-contain p-2 bg-gray-50" // ✅ show whole image
                 priority
               />
-              {product.originalPrice &&
+              {/* {product.originalPrice &&
                 product.originalPrice > product.price && (
                   <div className="absolute left-4 top-4 rounded-full bg-red-500/95 text-white px-3 py-1 text-xs font-semibold">
                     Save {formatPrice(product.originalPrice - product.price)}
                   </div>
-                )}
+                )} */}
               {!product.inStock && (
                 <div className="absolute inset-0 bg-black/40 text-white flex items-center justify-center text-lg font-semibold">
                   Out of Stock

@@ -237,8 +237,9 @@ export default function ProductsPage() {
               {paginated.map((p) => (
                 <article
                   key={`${p.id}-${safePage}`}
-                  className="group overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg transition-shadow"
+                  className="group flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg transition-shadow"
                 >
+                  {/* Image */}
                   <Link
                     href={`/products/${p.id}`}
                     className="relative h-52 md:h-96 block"
@@ -247,7 +248,7 @@ export default function ProductsPage() {
                       src={p.image}
                       alt={p.title}
                       fill
-                      className="object-contain p-2" 
+                      className="object-contain p-2"
                     />
                     <div className="absolute left-3 top-3 flex items-center gap-2">
                       <span className="rounded-full bg-yellow-400/95 text-[#21286E] px-3 py-1 text-xs font-bold">
@@ -259,14 +260,15 @@ export default function ProductsPage() {
                         </span>
                       )}
                     </div>
-                    {p.originalPrice && p.originalPrice > p.price && (
+                    {/* {p.originalPrice && p.originalPrice > p.price && (
                       <div className="absolute right-3 top-3 rounded-full bg-red-500 text-white px-3 py-1 text-xs font-semibold">
                         Save {formatPrice(p.originalPrice - p.price)}
                       </div>
-                    )}
+                    )} */}
                   </Link>
 
-                  <div className="p-4 sm:p-5">
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 p-4 sm:p-5">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900 line-clamp-2">
                       <Link
                         href={`/products/${p.id}`}
@@ -275,29 +277,32 @@ export default function ProductsPage() {
                         {p.title}
                       </Link>
                     </h3>
-                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-                      {p.description}
-                    </p>
 
-                    <div className="mt-4 flex items-end justify-between">
-                      <div className="flex flex-col">
-                        <span className="text-xl sm:text-2xl font-bold text-[#21286E]">
-                          {formatPrice(p.price)}
-                        </span>
+                    {/* <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+      {p.description}
+    </p> */}
+
+                    {/* Push price + button down */}
+                    <div className="mt-auto">
+                      <div className="flex items-end justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-xl sm:text-2xl font-bold text-[#21286E]">
+                            {formatPrice(p.price)}
+                          </span>
+                        </div>
+                        <div className="text-xs sm:text-sm text-gray-500">
+                          ⭐ {p.rating.toFixed(1)}
+                        </div>
                       </div>
 
-                      <div className="text-xs sm:text-sm text-gray-500">
-                        ⭐ {p.rating.toFixed(1)}
+                      <div className="mt-4">
+                        <Link
+                          href={`/products/${p.id}`}
+                          className="block rounded-xl px-4 py-2.5 text-sm font-semibold border text-center bg-yellow-400 text-[#21286E] hover:bg-yellow-300"
+                        >
+                          ดูรายละเอียด
+                        </Link>
                       </div>
-                    </div>
-
-                    <div className="mt-4 flex justify-start ">
-                      <Link
-                        href={`/products/${p.id}`}
-                        className="rounded-xl px-4 py-2.5 text-sm font-semibold  border  h text-center w-full bg-yellow-400 text-[#21286E] hover:bg-yellow-300"
-                      >
-                        ดูรายละเอียด
-                      </Link>
                     </div>
                   </div>
                 </article>

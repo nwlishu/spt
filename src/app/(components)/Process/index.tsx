@@ -1,4 +1,3 @@
-// components/Process.tsx
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -74,15 +73,6 @@ const Process: React.FC = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               การจัดส่งและการขนส่ง
             </h1>
-            {/* <div className="max-w-4xl mx-auto">
-              <p className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed">
-                กระบวนการจัดส่งที่มีประสิทธิภาพของเราทำให้คำสั่งซื้อของคุณถูกจัดส่งอย่างรวดเร็ว
-                โดยเรามุ่งมั่นในการจัดส่งภายใน{" "}
-                <span className="font-semibold text-gray-900">48 ชั่วโมง</span>
-                <br className="hidden md:block" />
-                เพื่อให้สามารถตอบสนองความต้องการเร่งด่วนของคุณได้ทันที
-              </p>
-            </div> */}
           </div>
 
           {/* Process Steps */}
