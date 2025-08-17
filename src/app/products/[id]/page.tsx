@@ -21,7 +21,7 @@ type Product = {
 
 type CatalogProduct = {
   id: number;
-  image: string;
+  image: string[];
   title: string;
   description: string;
   price: number;
@@ -79,7 +79,7 @@ export default function ProductDetailPage({
     id: item.id,
     title: item.title,
     description: item.description,
-    images: [item.image],
+    images: item.image,
     price: item.price,
     originalPrice: item.originalPrice,
     category: item.category,
@@ -142,7 +142,7 @@ export default function ProductDetailPage({
                 >
                   <Image
                     src={img}
-                    alt="thumb"
+                    alt={`Preview ${idx + 1}`}
                     fill
                     className={`object-contain p-1 ${
                       activeImage === idx
@@ -183,12 +183,6 @@ export default function ProductDetailPage({
               <span className="text-3xl font-extrabold text-[#21286E]">
                 {formatPrice(product.price)}
               </span>
-              {product.originalPrice &&
-                product.originalPrice > product.price && (
-                  <span className="text-base text-gray-400 line-through">
-                    {formatPrice(product.originalPrice)}
-                  </span>
-                )}
             </div>
 
             {/* Quantity and CTA */}
@@ -424,7 +418,7 @@ export default function ProductDetailPage({
                 >
                   <div className="relative h-80">
                     <Image
-                      src={rp.image}
+                      src={rp.image[0]}
                       alt={rp.title}
                       fill
                       className="object-cover"

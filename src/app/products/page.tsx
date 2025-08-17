@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import data from "./data.json";
+import { useRouter, useSearchParams } from "next/navigation";
+
 
 type Product = {
   id: number;
   title: string;
   description: string;
-  image: string;
+  image: string[];
   price: number;
   originalPrice?: number;
   category: string;
@@ -53,11 +55,16 @@ const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 9;
   const [isCatOpen, setIsCatOpen] = useState(false);
   const [categoryQuery, setCategoryQuery] = useState("");
   const catRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
+const searchParams = useSearchParams();
+const initialPage = parseInt(searchParams.get("page") || "1", 10);
+
+const [currentPage, setCurrentPage] = useState(initialPage);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -102,11 +109,21 @@ export default function ProductsPage() {
   const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
   const endItem = Math.min(filtered.length, safePage * pageSize);
 
-  const goToPage = (page: number) => {
-    if (page < 1) return setCurrentPage(1);
-    if (page > totalPages) return setCurrentPage(totalPages);
-    setCurrentPage(page);
-  };
+const goToPage = useCallback((page: number) => {
+  if (page < 1) page = 1;
+  if (page > totalPages) page = totalPages;
+
+  setCurrentPage(page);
+
+  // Update URL param without reloading
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", page.toString());
+  router.replace(`${window.location.pathname}?${params.toString()}`);
+}, [router, totalPages]);
+
+useEffect(() => {
+  goToPage(1);
+}, [selectedCategory, search, goToPage]);
 
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
@@ -245,7 +262,7 @@ export default function ProductsPage() {
                     className="relative h-52 md:h-96 block"
                   >
                     <Image
-                      src={p.image}
+                      src={p.image[0]}
                       alt={p.title}
                       fill
                       className="object-contain p-2"
