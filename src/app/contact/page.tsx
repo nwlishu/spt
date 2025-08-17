@@ -32,7 +32,7 @@ const ContactPage: React.FC = () => {
       <div className="min-h-screen my-24">
         {/* Page Header */}
         <div className="bg-[#21286E] md:px-8">
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-28 ">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-24 lg:py-28 ">
             <div className="text-center mb-6 sm:mb-10">
               <motion.h1
                 initial={{ opacity: 0 }}

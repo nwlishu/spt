@@ -68,7 +68,7 @@ const AboutUs: React.FC = () => {
     <div className="min-h-screen bg-white my-24">
       {/* Hero Section */}
       <div className="bg-[#21286E]">
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-28 ">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-24 lg:py-28 ">
           <div className="text-center mb-6 sm:mb-10">
             <motion.h1
               initial={{ opacity: 0 }}
@@ -352,7 +352,7 @@ const AboutUs: React.FC = () => {
           </motion.p>
 
           {/* Button */}
-          <Link href="/contact" >
+          <Link href="/contact">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
