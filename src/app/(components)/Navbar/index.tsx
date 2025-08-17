@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Contact Button */}
         <Link href="/contact">
-          <button className="hidden lg:block bg-indigo-900 text-white px-6 py-2 rounded-full hover:bg-indigo-800 transition-colors">
+          <button className="hidden lg:block bg-indigo-900 text-white px-6 py-2 rounded-full hover:bg-indigo-800 transition-colors cursor-pointer">
             ติดต่อเรา
           </button>
         </Link>
