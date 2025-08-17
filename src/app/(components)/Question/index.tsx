@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface FAQItemProps {
   question: string;
@@ -120,12 +121,24 @@ const Question: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+          >
             คำถามที่พบบ่อย (FAQ)
-          </h1>
-          <p className="text-gray-600 text-lg md:text-xl leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-gray-600 text-lg md:text-xl leading-relaxed"
+          >
             ดูคำถามทั่วไปที่เรามักจะได้รับบ่อย
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* FAQ Items */}
@@ -160,14 +173,16 @@ const Question: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <p className="text-gray-600 mb-4">ไม่พบคำตอบที่คุณต้องการ?</p>
-          <motion.button
-            className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-3 rounded-full font-medium"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-          >
-            ติดต่อเรา
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              className="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-3 rounded-full font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              ติดต่อเรา
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

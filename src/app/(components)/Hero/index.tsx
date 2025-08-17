@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection: React.FC = () => {
   return (
@@ -69,14 +70,28 @@ const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mt-6 sm:mt-8"
             >
-              <button className="bg-[#21286E] text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl border-1 border-white">
-                ดูสินค้าทั้งหมด
-              </button>
-              <button className="border-1 border-[#ffff] hover:border-white/60 text-[#ffff] font-semibold py-4 px-8 rounded-full transition-all duration-300 hover:bg-white/10">
-                ติดต่อเรา
-              </button>
+              <Link href="/products" className="w-full sm:w-auto">
+                <button
+                  className="cursor-pointer w-full sm:w-auto bg-[#21286E] text-white font-bold 
+      py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base lg:text-lg 
+      rounded-full shadow-lg transition-all duration-300 transform 
+      hover:scale-105 hover:shadow-xl border border-white"
+                >
+                  ดูสินค้าทั้งหมด
+                </button>
+              </Link>
+
+              <Link href="/contact" className="w-full sm:w-auto">
+                <button
+                  className="cursor-pointer w-full sm:w-auto border border-white/80 text-white font-semibold 
+      py-3 px-6 sm:py-4 sm:px-8 text-sm sm:text-base lg:text-lg 
+      rounded-full transition-all duration-300 hover:bg-white/10"
+                >
+                  ติดต่อเรา
+                </button>
+              </Link>
             </motion.div>
           </div>
         </div>

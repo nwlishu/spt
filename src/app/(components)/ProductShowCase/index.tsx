@@ -155,7 +155,13 @@ const ProductShowcase: React.FC = () => {
         {/* Products Section */}
         <div>
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          >
             {products.map((product, index) => (
               <ProductCard
                 key={index}
@@ -165,11 +171,11 @@ const ProductShowcase: React.FC = () => {
                 imagePath={product.imagePath}
               />
             ))}
-          </div>
+          </motion.div>
 
           {/* View All Button */}
           <div className="flex justify-end">
-            <button className="bg-[#21286E] text-white px-8 py-2 rounded-full hover:bg--[#21286E] transform hover:scale-105 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl">
+            <button className="cursor-pointer bg-[#21286E] text-white px-8 py-2 rounded-full hover:bg--[#21286E] transform hover:scale-105 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl">
               ชมทั้งหมด
             </button>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
 interface ProcessStepProps {
   number: string;
   title: string;
@@ -70,14 +70,26 @@ const Process: React.FC = () => {
         <div className="w-full">
           {/* Header Section */}
           <div className="text-center mb-16">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <motion.h1
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+            >
               การจัดส่งและการขนส่ง
-            </h1>
+            </motion.h1>
           </div>
 
           {/* Process Steps */}
           <div className="max-w-7xl mx-auto">
-            <div className="space-y-0">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+              className="space-y-0"
+            >
               {processSteps.map((step, index) => (
                 <ProcessStep
                   key={index}
@@ -86,21 +98,39 @@ const Process: React.FC = () => {
                   description={step.description}
                 />
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Shipping Partners */}
           <div className="max-w-7xl mx-auto mt-16">
             <div className="text-center mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+              <motion.h2
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8 }}
+                className="text-xl md:text-2xl font-bold text-gray-900 mb-2"
+              >
                 พาร์ทเนอร์ขนส่งของเรา
-              </h2>
-              <p className="text-gray-600 text-sm md:text-base">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8 }}
+                className="text-gray-600 text-sm md:text-base"
+              >
                 Flash Express / SPX Express / KEX Express และขนส่งประจำภาค
-              </p>
+              </motion.p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-6"
+            >
               {/* Flash Express */}
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
                 <div className="w-28 h-16 relative">
@@ -160,7 +190,7 @@ const Process: React.FC = () => {
                   ขนส่งประจำภาค
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

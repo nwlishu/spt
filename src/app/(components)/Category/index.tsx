@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface CategoryCardProps {
   number: string;
@@ -10,10 +11,7 @@ interface CategoryCardProps {
   isLast?: boolean;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({
-  title,
-  image,
-}) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ title, image }) => {
   return (
     <div className="relative group cursor-pointer">
       {/* Card Container with wave-like bottom */}
@@ -86,18 +84,36 @@ const Category: React.FC = () => {
       <div className="container mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-wide">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-wide"
+          >
             Ours Categories
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl lg:text-2xl max-w-5xl mx-auto leading-relaxed font-light">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-white/90 text-lg md:text-xl lg:text-2xl max-w-5xl mx-auto leading-relaxed font-light"
+          >
             กระบวนการจัดส่งที่มีประสิทธิภาพของเราทำให้คำสั่งซื้อของคุณถูกจัดส่งอย่างรวดเร็ว
             โดยเรามุ่งมั่นในการจัดส่งภายใน 48 ชั่วโมง
             เพื่อให้สามารถตอบสนองความต้องการเร่งด่วนของคุณได้ทันที
-          </p>
+          </motion.p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+        >
           {categories.map((category, index) => (
             <CategoryCard
               key={index}
@@ -108,7 +124,7 @@ const Category: React.FC = () => {
               isLast={index === categories.length - 1}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

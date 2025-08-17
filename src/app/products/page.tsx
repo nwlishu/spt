@@ -53,91 +53,99 @@ const categories: string[] = [
 const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [search, setSearch] = useState("");
-  // const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 9;
-  const [isCatOpen, setIsCatOpen] = useState(false);
-  const [categoryQuery, setCategoryQuery] = useState("");
-  const catRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter();
+ const [selectedCategory, setSelectedCategory] = useState<string>("All");
+const [search, setSearch] = useState("");
+const pageSize = 9;
+const [isCatOpen, setIsCatOpen] = useState(false);
+const [categoryQuery, setCategoryQuery] = useState("");
+const catRef = useRef<HTMLDivElement | null>(null);
+const router = useRouter();
 const searchParams = useSearchParams();
-const initialPage = parseInt(searchParams.get("page") || "1", 10);
 
+// 1️⃣ Initialize currentPage from URL
+const initialPage = parseInt(searchParams.get("page") || "1", 10);
 const [currentPage, setCurrentPage] = useState(initialPage);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const onDown = (e: MouseEvent) => {
-      if (!catRef.current) return;
-      if (!catRef.current.contains(e.target as Node)) setIsCatOpen(false);
-    };
-    document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
-  }, []);
+// Close dropdown on outside click
+useEffect(() => {
+  const onDown = (e: MouseEvent) => {
+    if (!catRef.current) return;
+    if (!catRef.current.contains(e.target as Node)) setIsCatOpen(false);
+  };
+  document.addEventListener("mousedown", onDown);
+  return () => document.removeEventListener("mousedown", onDown);
+}, []);
 
-  const filteredCategories = useMemo(() => {
-    const q = categoryQuery.trim().toLowerCase();
-    return categories.filter((c) => c.toLowerCase().includes(q));
-  }, [categoryQuery]);
+// Filter categories
+const filteredCategories = useMemo(() => {
+  const q = categoryQuery.trim().toLowerCase();
+  return categories.filter((c) => c.toLowerCase().includes(q));
+}, [categoryQuery]);
 
-  const filtered = useMemo(() => {
-    return allProducts.filter((p) => {
-      const matchCat =
-        selectedCategory === "All" || p.category === selectedCategory;
-      const term = search.trim().toLowerCase();
-      const matchSearch =
-        !term ||
-        p.title.toLowerCase().includes(term) ||
-        p.description.toLowerCase().includes(term);
-      return matchCat && matchSearch;
-    });
-  }, [selectedCategory, search]);
+// Filter products
+const filtered = useMemo(() => {
+  return allProducts.filter((p) => {
+    const matchCat = selectedCategory === "All" || p.category === selectedCategory;
+    const term = search.trim().toLowerCase();
+    const matchSearch = !term || p.title.toLowerCase().includes(term) || p.description.toLowerCase().includes(term);
+    return matchCat && matchSearch;
+  });
+}, [selectedCategory, search]);
 
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, search]);
+// 2️⃣ Update currentPage when filters change
+useEffect(() => {
+  setCurrentPage(1);
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", "1");
+  router.replace(`${window.location.pathname}?${params.toString()}`);
+}, [selectedCategory, search, router]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  const safePage = Math.min(currentPage, totalPages);
-  const paginated = useMemo(() => {
-    const start = (safePage - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, safePage, pageSize]);
+// // 3️⃣ Keep currentPage in sync with URL (back/forward navigation)
+// useEffect(() => {
+//   const urlPage = parseInt(searchParams.get("page") || "1", 10);
+//   if (urlPage !== currentPage) {
+//     setCurrentPage(urlPage);
+//   }
+// }, [searchParams, currentPage]);
 
-  const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
-  const endItem = Math.min(filtered.length, safePage * pageSize);
+const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+const safePage = Math.min(currentPage, totalPages);
 
+// Paginate
+const paginated = useMemo(() => {
+  const start = (safePage - 1) * pageSize;
+  return filtered.slice(start, start + pageSize);
+}, [filtered, safePage, pageSize]);
+
+const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
+const endItem = Math.min(filtered.length, safePage * pageSize);
+
+// Go to page
 const goToPage = useCallback((page: number) => {
   if (page < 1) page = 1;
   if (page > totalPages) page = totalPages;
 
   setCurrentPage(page);
 
-  // Update URL param without reloading
   const params = new URLSearchParams(window.location.search);
   params.set("page", page.toString());
   router.replace(`${window.location.pathname}?${params.toString()}`);
 }, [router, totalPages]);
 
-useEffect(() => {
-  goToPage(1);
-}, [selectedCategory, search, goToPage]);
+// Pagination numbers
+const getPageNumbers = () => {
+  const pages: (number | string)[] = [];
+  const delta = 1; // neighbors around current
+  const left = Math.max(2, safePage - delta);
+  const right = Math.min(totalPages - 1, safePage + delta);
 
-  const getPageNumbers = () => {
-    const pages: (number | string)[] = [];
-    const delta = 1; // neighbors around current
-    const left = Math.max(2, safePage - delta);
-    const right = Math.min(totalPages - 1, safePage + delta);
-
-    pages.push(1);
-    if (left > 2) pages.push("...");
-    for (let i = left; i <= right; i++) pages.push(i);
-    if (right < totalPages - 1) pages.push("...");
-    if (totalPages > 1) pages.push(totalPages);
-    return pages;
-  };
+  pages.push(1);
+  if (left > 2) pages.push("...");
+  for (let i = left; i <= right; i++) pages.push(i);
+  if (right < totalPages - 1) pages.push("...");
+  if (totalPages > 1) pages.push(totalPages);
+  return pages;
+};
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -335,7 +343,7 @@ useEffect(() => {
                 <button
                   onClick={() => goToPage(safePage - 1)}
                   disabled={safePage === 1}
-                  className={`px-3 py-2 rounded-lg border text-sm font-medium ${
+                  className={`cursor-pointer px-3 py-2 rounded-lg border text-sm font-medium ${
                     safePage === 1
                       ? "text-gray-400 border-gray-200 cursor-not-allowed"
                       : "text-[#21286E] border-[#21286E]/30 hover:border-[#21286E]"
@@ -349,7 +357,7 @@ useEffect(() => {
                     <button
                       key={idx}
                       onClick={() => goToPage(p)}
-                      className={`min-w-9 px-3 py-2 rounded-lg border text-sm font-semibold ${
+                      className={`cursor-pointer min-w-9 px-3 py-2 rounded-lg border text-sm font-semibold ${
                         safePage === p
                           ? "bg-[#21286E] text-white border-[#21286E]"
                           : "bg-white text-[#21286E] border-[#21286E]/30 hover:border-[#21286E]"
@@ -358,7 +366,7 @@ useEffect(() => {
                       {p}
                     </button>
                   ) : (
-                    <span key={idx} className="px-2 text-gray-400 select-none">
+                    <span key={idx} className="cursor-poniter px-2 text-gray-400 select-none">
                       {p}
                     </span>
                   )
@@ -367,7 +375,7 @@ useEffect(() => {
                 <button
                   onClick={() => goToPage(safePage + 1)}
                   disabled={safePage === totalPages}
-                  className={`px-3 py-2 rounded-lg border text-sm font-medium ${
+                  className={`cursor-pointer px-3 py-2 rounded-lg border text-sm font-medium ${
                     safePage === totalPages
                       ? "text-gray-400 border-gray-200 cursor-not-allowed"
                       : "text-[#21286E] border-[#21286E]/30 hover:border-[#21286E]"
