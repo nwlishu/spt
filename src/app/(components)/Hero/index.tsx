@@ -1,22 +1,27 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const HeroSection: React.FC = () => {
   return (
     <section className="relative mt-21 mx-4 md:mx-18 overflow-hidden">
-      <motion.div
-        className="absolute rounded-xl inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{
-          backgroundImage: `url('https://sptpart-bucket.s3.ap-southeast-1.amazonaws.com/image/home/herograss.png')`,
-        }}
-      >
-        {/* Dark overlay for better text readability */}
+      <motion.div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
+        {/* Background Image */}
+        <Image
+          src="/hero.webp"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+
+        {/* Dark overlay for text readability */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="absolute inset-0 bg-black/75 rounded-2xl"
+          className="absolute inset-0 bg-black/75"
         />
       </motion.div>
       <motion.div
@@ -45,64 +50,6 @@ const HeroSection: React.FC = () => {
             </motion.h1>
 
             <hr className="border-gray-300 mb-8" />
-
-            {/* Performance Section */}
-            {/* <div className="mb-8">
-              <h2 className="text-lg lg:text-2xl font-semibold text-gray-900 mb-6">
-                Our Performance
-              </h2>
-
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-700 lg:text-lg">
-                    Customer Satisfaction
-                  </span>
-                  <span className="text-indigo-900 font-semibold lg:text-lg">
-                    95%
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-indigo-900 h-2 rounded-full"
-                    style={{ width: "95%" }}
-                  ></div>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-700 lg:text-lg">
-                    Quality rating
-                  </span>
-                  <span className="text-yellow-500 font-semibold lg:text-lg">
-                    82%
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-yellow-500 h-2 rounded-full"
-                    style={{ width: "82%" }}
-                  ></div>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-700 lg:text-lg">
-                    Service Excellence
-                  </span>
-                  <span className="text-yellow-500 font-semibold lg:text-lg">
-                    88%
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-yellow-500 h-2 rounded-full"
-                    style={{ width: "88%" }}
-                  ></div>
-                </div>
-              </div>
-            </div> */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -131,29 +78,6 @@ const HeroSection: React.FC = () => {
                 ติดต่อเรา
               </button>
             </motion.div>
-
-            {/* <div className="flex items-center justify-end gap-8 mt-4">
-              <div>
-                <h3 className="text-xl lg:text-3xl font-bold text-gray-900 mb-1">
-                  DISCOVER
-                </h3>
-                <h3 className="text-xl lg:text-3xl font-bold text-gray-900 mb-1">
-                  FOR OUR
-                </h3>
-                <h3 className="text-xl lg:text-3xl font-bold text-gray-900">
-                  MACHINES
-                </h3>
-              </div>
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-full p-3 transition-colors">
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 14l5-5 5 5H7z" transform="rotate(45 12 12)" />
-                </svg>
-              </button>
-            </div> */}
           </div>
         </div>
       </motion.div>

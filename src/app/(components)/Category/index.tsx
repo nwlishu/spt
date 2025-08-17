@@ -63,22 +63,22 @@ const Category: React.FC = () => {
       number: "24+",
       title: "จานยึดใบมีด",
       isFirst: true,
-      image: "/KR.jpg",
+      image: "/KR.webp",
     },
     {
       number: "200",
       title: "คาร์บูเรเตอร์",
-      image: "/NB411.jpg",
+      image: "/NB411.webp",
     },
     {
       number: "200",
       title: "มือเร่งเครื่องตัดหญ้า",
-      image: "/TL43.jpg",
+      image: "/TL43.webp",
     },
     {
       number: "200",
       title: "คอยล์",
-      image: "/CDI.jpg",
+      image: "/CDI.webp",
       isLast: true,
     },
   ];
