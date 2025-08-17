@@ -111,12 +111,12 @@ export default function ProductDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Gallery */}
           <div>
-            <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white shadow">
+            <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-white shadow flex items-center justify-center">
               <Image
                 src={product.images[activeImage]}
                 alt={product.title}
                 fill
-                className="object-cover"
+                className="object-contain p-2 bg-gray-50" // ✅ show whole image
                 priority
               />
               {product.originalPrice &&
@@ -137,14 +137,19 @@ export default function ProductDetailPage({
                 <button
                   key={idx}
                   onClick={() => setActiveImage(idx)}
-                  className={`relative aspect-square overflow-hidden rounded-xl border transition ${
-                    activeImage === idx
-                      ? "border-[#21286E] ring-2 ring-[#21286E]/30"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
+                  className={`relative aspect-square overflow-hidden rounded-xl border transition flex items-center justify-center`}
                   aria-label={`Preview ${idx + 1}`}
                 >
-                  <Image src={img} alt="thumb" fill className="object-cover" />
+                  <Image
+                    src={img}
+                    alt="thumb"
+                    fill
+                    className={`object-contain p-1 ${
+                      activeImage === idx
+                        ? "border-[#21286E] ring-2 ring-[#21286E]/30"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  />
                 </button>
               ))}
             </div>
@@ -190,54 +195,53 @@ export default function ProductDetailPage({
             <div className="mt-6  items-center gap-3">
               <p className="text-sm text-gray-600 mb-3">ช่องทางการสั่งซื้อ</p>
 
-                  <div className="flex space-x-2 items-center">
-                              <div className="w-10 h-10  flex items-center justify-center">
-                                <Image
-                                  src="/facebook.svg"
-                                  width="112"
-                                  height="112"
-                                  alt=""
-                                  className="object-contain"
-                                />
-                              </div>
-                              <div className="w-10 h-10   flex items-center justify-center">
-                                <Image
-                                  src="/shopee.svg"
-                                  width="112"
-                                  height="112"
-                                  alt=""
-                                  className="object-contain"
-                                />
-                              </div>
-                              <div className="w-10 h-10   flex items-center justify-center">
-                                <Image
-                                  src="/tiktok.svg"
-                                  width="112"
-                                  height="112"
-                                  alt=""
-                                  className="object-contain"
-                                />
-                              </div>
-                              <div className="w-10 h-10   flex items-center justify-center">
-                                <Image
-                                  src="/line.svg"
-                                  width="112"
-                                  height="112"
-                                  alt=""
-                                  className="object-contain"
-                                />
-                              </div>
-                              <div className="w-8 h-8   flex items-center justify-center">
-                                <Image
-                                  src="/lazada.png"
-                                  width="112"
-                                  height="112"
-                                  alt=""
-                                  className="object-contain"
-                                />
-                              </div>
-                            </div>
-
+              <div className="flex space-x-2 items-center">
+                <div className="w-10 h-10  flex items-center justify-center">
+                  <Image
+                    src="/facebook.svg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    className="object-contain"
+                  />
+                </div>
+                <div className="w-10 h-10   flex items-center justify-center">
+                  <Image
+                    src="/shopee.svg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    className="object-contain"
+                  />
+                </div>
+                <div className="w-10 h-10   flex items-center justify-center">
+                  <Image
+                    src="/tiktok.svg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    className="object-contain"
+                  />
+                </div>
+                <div className="w-10 h-10   flex items-center justify-center">
+                  <Image
+                    src="/line.svg"
+                    width="112"
+                    height="112"
+                    alt=""
+                    className="object-contain"
+                  />
+                </div>
+                <div className="w-8 h-8   flex items-center justify-center">
+                  <Image
+                    src="/lazada.png"
+                    width="112"
+                    height="112"
+                    alt=""
+                    className="object-contain"
+                  />
+                </div>
+              </div>
 
               {/* <div className="inline-flex items-center rounded-xl border border-gray-200 bg-white">
                 <button

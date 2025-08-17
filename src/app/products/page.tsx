@@ -247,7 +247,7 @@ export default function ProductsPage() {
                       src={p.image}
                       alt={p.title}
                       fill
-                      className="object-cover"
+                      className="object-contain p-2" 
                     />
                     <div className="absolute left-3 top-3 flex items-center gap-2">
                       <span className="rounded-full bg-yellow-400/95 text-[#21286E] px-3 py-1 text-xs font-bold">
@@ -284,11 +284,6 @@ export default function ProductsPage() {
                         <span className="text-xl sm:text-2xl font-bold text-[#21286E]">
                           {formatPrice(p.price)}
                         </span>
-                        {/* {p.originalPrice && p.originalPrice > p.price && (
-                          <span className="text-xs text-gray-500 line-through">
-                            {formatPrice(p.originalPrice)}
-                          </span>
-                        )} */}
                       </div>
 
                       <div className="text-xs sm:text-sm text-gray-500">
@@ -303,16 +298,6 @@ export default function ProductsPage() {
                       >
                         ดูรายละเอียด
                       </Link>
-                      {/* <button
-                        className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
-                          p.inStock
-                            ? "bg-yellow-400 text-[#21286E] hover:bg-yellow-300"
-                            : "bg-gray-200 text-gray-500 cursor-not-allowed"
-                        }`}
-                        disabled={!p.inStock}
-                      >
-                        {p.inStock ? "Add to Cart" : "Notify Me"}
-                      </button> */}
                     </div>
                   </div>
                 </article>
