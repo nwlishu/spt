@@ -93,30 +93,30 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-white transform rotate-45"></div>
-                  <a
-                    href="#"
+                  <Link
+                    href="/about"
                     className="text-sm hover:text-white transition-colors"
                   >
                     เกี่ยวกับเรา
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-white transform rotate-45"></div>
-                  <a
-                    href="#"
+                  <Link
+                    href="/products"
                     className="text-sm hover:text-white transition-colors"
                   >
                     สินค้า
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-white transform rotate-45"></div>
-                  <a
-                    href="#"
+                  <Link
+                    href="/contact"
                     className="text-sm hover:text-white transition-colors"
                   >
                     ติดต่อเรา
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
