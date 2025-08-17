@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 const Footer = () => {
   return (
     <div className="px-2 lg:px-16">
@@ -24,49 +24,65 @@ const Footer = () => {
               {/* Social Media Icons */}
               <div className="flex space-x-2 items-center">
                 <div className="w-10 h-10  flex items-center justify-center">
-                  <Image
-                    src="/facebook.svg"
-                    width="112"
-                    height="112"
-                    alt=""
-                    className="object-contain"
-                  />
+                  <Link
+                    target="_blank"
+                    href="https://www.facebook.com/KasetParts"
+                  >
+                    <Image
+                      src="/facebook.svg"
+                      width="112"
+                      height="112"
+                      alt=""
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
                 <div className="w-10 h-10   flex items-center justify-center">
-                  <Image
-                    src="/shopee.svg"
-                    width="112"
-                    height="112"
-                    alt=""
-                    className="object-contain"
-                  />
+                  <Link target="_blank" href="https://th.shp.ee/MtEHvTE">
+                    <Image
+                      src="/shopee.svg"
+                      width="112"
+                      height="112"
+                      alt=""
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
                 <div className="w-10 h-10   flex items-center justify-center">
-                  <Image
-                    src="/tiktok.svg"
-                    width="112"
-                    height="112"
-                    alt=""
-                    className="object-contain"
-                  />
+                  <Link
+                    target="_blank"
+                    href="https://vt.tiktok.com/ZSkV1J3or/?page=TikTokShop"
+                  >
+                    <Image
+                      src="/tiktok.svg"
+                      width="112"
+                      height="112"
+                      alt=""
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
                 <div className="w-10 h-10   flex items-center justify-center">
-                  <Image
-                    src="/line.svg"
-                    width="112"
-                    height="112"
-                    alt=""
-                    className="object-contain"
-                  />
+                  <Link target="_blank" href="https://lin.ee/lPNKgys">
+                    <Image
+                      src="/line.svg"
+                      width="112"
+                      height="112"
+                      alt=""
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
                 <div className="w-8 h-8   flex items-center justify-center">
-                  <Image
-                    src="/lazada.png"
-                    width="112"
-                    height="112"
-                    alt=""
-                    className="object-contain"
-                  />
+                  <Link target="_blank" href="https://s.lazada.co.th/s.Ci92F">
+                    <Image
+                      src="/lazada.png"
+                      width="112"
+                      height="112"
+                      alt=""
+                      className="object-contain"
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
