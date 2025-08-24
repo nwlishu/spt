@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../../public/logo_KP_2.svg";
+import Logo from "../../../../public/logo.png";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/" className="">
-            <Image src={Logo} alt="" width={75} height={75} />
+            <Image src={Logo} alt="" width={140} height={140} />
           </Link>
         </div>
 
