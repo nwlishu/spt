@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const Footer = () => {
   return (
-    <div className="px-2 lg:px-16">
+    <div className="px-2 lg:px-8">
       <footer className="bg-[#21286E] text-gray-300 rounded-lg">
         {/* Main Footer Content */}
         <div className="container mx-auto px-6 py-12">
@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="space-y-6">
               {/* Logo */}
               <div className="bg-white rounded-lg p-2 w-24 h-24 flex flex-col items-center justify-center">
-                <Image src="/logo_KP_2.svg" alt="" width={112} height={112} />
+                <Image src="/logo.png" alt="" width={150} height={150} />
               </div>
 
               {/* Address */}
@@ -126,23 +126,18 @@ const Footer = () => {
               {/* Email */}
               <div className="space-y-2">
                 <h3 className="text-lg font-bold text-gray-300">Email</h3>
-                <p className="text-sm">KPkasetparts@hotmail.co.th</p>
+                <p className="text-sm">sptparttrading.official@gmail.com</p>
               </div>
 
               {/* Phone */}
               <div className="space-y-2">
-                <h3 className="text-lg font-bold text-gray-300">Phone</h3>
+                <h3 className="text-lg font-bold text-gray-300">Tel.</h3>
                 <div className="space-y-1 text-sm">
-                  <p>02-435-5049</p>
-                  <p>081-855-2903</p>
-                  <p>080-963-0655</p>
+                  <p>02-410-8922 (สำนักงาน)</p>
+                  <p>081-624-9645 (มือถือสำนักงาน)</p>
+                  <p>092-542-6955 (ฝ่ายขาย)</p>
+                  <p>099-353-6697 (ฝ่ายขายออนไลน์)</p>
                 </div>
-              </div>
-
-              {/* FAX */}
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-gray-300">FAX</h3>
-                <p className="text-sm">02-8834521</p>
               </div>
             </div>
           </div>

@@ -71,10 +71,10 @@ const AboutUs: React.FC = () => {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-24 lg:py-48 ">
           <div className="text-center mb-6 sm:mb-10">
             <motion.h1
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8 }}
+              // initial={{ opacity: 0 }}
+              // whileInView={{ opacity: 1 }}
+              // viewport={{ once: true, amount: 0.3 }}
+              // transition={{ duration: 0.8 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffff]"
             >
               เกี่ยวกับบริษัท บริษัท เอสพีที พาร์ท เทรดดิ้ง จำกัด

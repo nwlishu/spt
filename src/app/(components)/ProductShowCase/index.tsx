@@ -4,28 +4,28 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const InfoCard = ({
-  title,
-  description,
-  delay = 0,
-}: {
-  title: string;
-  description: string;
-  delay?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="bg-gray-50 p-6 rounded-xl"
-    >
-      <h3 className="text-lg font-semibold text-[#15274B] mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
-    </motion.div>
-  );
-};
+// const InfoCard = ({
+//   title,
+//   description,
+//   delay = 0,
+// }: {
+//   title: string;
+//   description: string;
+//   delay?: number;
+// }) => {
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 20 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true }}
+//       transition={{ duration: 0.5, delay }}
+//       className="bg-gray-50 p-6 rounded-xl"
+//     >
+//       <h3 className="text-lg font-semibold text-[#15274B] mb-2">{title}</h3>
+//       <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+//     </motion.div>
+//   );
+// };
 
 interface ProductCardProps {
   title: string;
@@ -117,15 +117,15 @@ const ProductShowcase: React.FC = () => {
               className="mb-8"
             >
               <span className="text-[#21286E]] text-sm font-semibold tracking-wider uppercase">
-                สินค้าของเรา
+               สินค้าทั้งหมด
               </span>
               <div className="w-20 h-1 bg-[#21286E] mt-2" />
             </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#21286E] mb-6">
+            {/* <h2 className="text-3xl md:text-4xl font-bold text-[#21286E] mb-6">
               อะไหล่และอุปกรณ์เครื่องตัดหญ้าคุณภาพสูงหลากหลายประเภทของเรา
-            </h2>
+            </h2> */}
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -150,7 +150,7 @@ const ProductShowcase: React.FC = () => {
                 delay={0.4}
               />
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
         {/* Products Section */}
         <div>
@@ -175,7 +175,7 @@ const ProductShowcase: React.FC = () => {
 
           {/* View All Button */}
           <div className="flex justify-end">
-            <button className="cursor-pointer bg-[#21286E] text-white px-8 py-2 rounded-full hover:bg--[#21286E] transform hover:scale-105 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl">
+            <button className="bg-[#21286E] text-white px-8 py-2 rounded-full hover:bg--[#21286E] transform hover:scale-105 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl">
               ชมทั้งหมด
             </button>
           </div>

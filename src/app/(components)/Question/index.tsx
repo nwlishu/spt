@@ -18,7 +18,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
 }) => {
   return (
     <motion.div
-      className="bg-gray-50 rounded-lg p-6 mb-4 cursor-pointer hover:bg-gray-100"
+      className="bg-yellow-500 rounded-lg p-6 mb-4 cursor-pointer hover:bg-yellow-500"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
@@ -26,12 +26,12 @@ const FAQItem: React.FC<FAQItemProps> = ({
         <h3 className="text-lg font-bold text-gray-900 pr-4">{question}</h3>
         <div className="flex-shrink-0">
           <motion.div
-            className="w-8 h-8 bg-yellow-200 rounded-full flex items-center justify-center"
+            className="w-8 h-8 bg-[#21286E] rounded-full flex items-center justify-center"
             whileHover={{ backgroundColor: "yellow" }}
             transition={{ duration: 0.2 }}
           >
             <motion.svg
-              className="w-4 h-4 text-yellow-600"
+              className="w-4 h-4 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
             }}
             className="overflow-hidden"
           >
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            <div className="mt-4 pt-4 border-t border-gray-200 bg-yellow-500">
               <motion.p
                 className="text-gray-700 leading-relaxed"
                 initial={{ opacity: 0, y: -10 }}
@@ -112,7 +112,7 @@ const Question: React.FC = () => {
   };
 
   return (
-    <section className="bg-white py-20 px-6">
+    <section className="bg-white py-20 px-6 mx-8 mt-24 rounded-xl">
       <div className="container mx-auto max-w-7xl">
         {/* Header Section */}
         <motion.div

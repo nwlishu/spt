@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 interface ProcessStepProps {
   number: string;
@@ -65,7 +64,7 @@ const Process: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white pt-20 px-6">
+    <section className="bg-yellow-500 pt-20 px-6 pb-32 mx-8 rounded-xl mb-16">
       <div className="relative container mx-auto px-6 flex items-center">
         <div className="w-full">
           {/* Header Section */}
@@ -98,98 +97,6 @@ const Process: React.FC = () => {
                   description={step.description}
                 />
               ))}
-            </motion.div>
-          </div>
-
-          {/* Shipping Partners */}
-          <div className="max-w-7xl mx-auto mt-16">
-            <div className="text-center mb-8">
-              <motion.h2
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8 }}
-                className="text-xl md:text-2xl font-bold text-gray-900 mb-2"
-              >
-                พาร์ทเนอร์ขนส่งของเรา
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8 }}
-                className="text-gray-600 text-sm md:text-base"
-              >
-                Flash Express / SPX Express / KEX Express และขนส่งประจำภาค
-              </motion.p>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6"
-            >
-              {/* Flash Express */}
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-                <div className="w-28 h-16 relative">
-                  <Image
-                    src="/flash.png"
-                    alt="Flash Express"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="mt-3 text-sm text-gray-700 font-medium">
-                  Flash Express
-                </span>
-              </div>
-
-              {/* SPX Express */}
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-                <div className="w-28 h-16 relative">
-                  <Image
-                    src="/spx.png"
-                    alt="SPX Express"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="mt-3 text-sm text-gray-700 font-medium">
-                  SPX Express
-                </span>
-              </div>
-
-              {/* KEX Express */}
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-                <div className="w-28 h-16 relative">
-                  <Image
-                    src="/kex_1.png"
-                    alt="KEX Express"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="mt-3 text-sm text-gray-700 font-medium">
-                  KEX Express
-                </span>
-              </div>
-
-              {/* Regional Transport */}
-              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-                <div className="w-28 h-16 relative">
-                  <Image
-                    src="/delivery.svg"
-                    alt="KEX Express"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <span className="mt-3 text-sm text-gray-700 font-medium">
-                  ขนส่งประจำภาค
-                </span>
-              </div>
             </motion.div>
           </div>
         </div>

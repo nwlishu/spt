@@ -18,7 +18,7 @@ const StatCard: React.FC<StatCardProps> = ({ label, value, description }) => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="mb-6">
-        <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mb-2">
+        <p className="text-gray-700 text-sm font-medium uppercase tracking-wider mb-2">
           {label}
         </p>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
@@ -55,7 +55,7 @@ const Quote: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white py-24 px-4">
+    <section className="bg-white py-24 px-8">
       <div className="container mx-auto max-w-full">
         {/* Main Quote Section */}
         <motion.div
@@ -83,8 +83,11 @@ const Quote: React.FC = () => {
               <blockquote className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-normal italic relative z-10 px-8">
                 บริษัท เอส พี ที พาร์ท เทรดดิ้ง จำกัด (ร้านต.ทวีกิจ)
                 ศูนย์รวมอะไหล่เครื่องตัดหญ้า อะไหล่ปั๊มชัก ซิล คอนเดนเซอร์
-                จำหน่ายทั้งค้าส่งและค้าปลีก
-                ด้วยความมุ่งมั่นในการคัดสรรสินค้าคุณภาพและการบริการที่ตอบโจทย์ความต้องการของลูกค้าอย่างครบวงจร
+                จำหน่ายทั้งค้าส่งและค้าปลีก <br /> ด้วยประสบการณ์มากกว่า 40 ปี
+                เรามุ่งมั่นคัดสรรสินค้าคุณภาพ และการบริการที่ตอบโจทย์
+                ความต้องการของลูกค้าอย่างครบวงจร เราสัญญาจะยืนหยัด
+                ในการเป็นผู้นำด้านอะไหล่การเกษตรเพื่อให้ลูกค้าทุกท่าน
+                ได้รับสินค้าที่มีคุณภาพ และบริการที่ดีที่สุด
               </blockquote>
             </div>
           </div>
@@ -92,7 +95,7 @@ const Quote: React.FC = () => {
 
         {/* Statistics Section */}
         <motion.div
-          className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-8 md:px-12 lg:px-16 rounded-3xl"
+          className=" bg-yellow-500 py-16 px-8 md:px-12 lg:px-16 rounded-3xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}

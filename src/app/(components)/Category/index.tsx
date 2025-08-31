@@ -57,31 +57,37 @@ const Category: React.FC = () => {
   const categories: CategoryCardProps[] = [
     {
       number: "24+",
-      title: "จานยึดใบมีด",
+      title: "อะไหล่เครื่องตัดหญ้า",
       isFirst: true,
-      image: "/KR.webp",
+      image: "/category/1_อะไหล่เครื่องตัดหญ้า.webp",
     },
     {
       number: "200",
-      title: "คาร์บูเรเตอร์",
-      image: "/NB411.webp",
+      title: "อะไหล่เครื่องพ่นยา",
+      image: "/category/2_อะไหล่เครื่องพ่นยา.webp",
     },
     {
       number: "200",
-      title: "มือเร่งเครื่องตัดหญ้า",
-      image: "/TL43.webp",
+      title: "อะไหล่ปั๊มน้ำ",
+      image: "/category/3_อะไหล่ปั๊มชัก.webp",
     },
     {
       number: "200",
-      title: "คอยล์",
-      image: "/CDI.webp",
+      title: "คอนเดนเซอร์",
+      image: "/category/4_คอนเดนเซอร์.webp",
+      isLast: true,
+    },
+    {
+      number: "200",
+      title: "ซีล",
+      image: "/category/5_ซีล.webp",
       isLast: true,
     },
   ];
 
   return (
     <section className="bg-[#21286E] py-20 px-6">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto ">
         {/* Header Section */}
         <div className="text-center mb-16">
           <motion.h1
@@ -91,7 +97,7 @@ const Category: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-wide"
           >
-            Ours Categories
+            สินค้าตราแตร
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -100,9 +106,8 @@ const Category: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-white/90 text-lg md:text-xl lg:text-2xl max-w-5xl mx-auto leading-relaxed font-light"
           >
-            กระบวนการจัดส่งที่มีประสิทธิภาพของเราทำให้คำสั่งซื้อของคุณถูกจัดส่งอย่างรวดเร็ว
-            โดยเรามุ่งมั่นในการจัดส่งภายใน 48 ชั่วโมง
-            เพื่อให้สามารถตอบสนองความต้องการเร่งด่วนของคุณได้ทันที
+            สินค้าตราแตร (TRUMPET) ของเรา มีรายการสินค้าให้เลือกมากกว่า 3,000
+            รายการ ตอบโจทย์ทุกความต้องการของคุณ
           </motion.p>
         </div>
 
@@ -112,7 +117,7 @@ const Category: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8"
         >
           {categories.map((category, index) => (
             <CategoryCard
