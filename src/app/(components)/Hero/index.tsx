@@ -106,7 +106,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       <motion.div
-        className="relative container mx-auto px-2 md:px-6 flex items-center h-[calc(100vh-96px)] mt-16 mb-16 lg:mt-0 lg:mb-0"
+        className="relative container mx-auto px-2 md:px-6 flex items-center h-[calc(50vh-96px)] md:h-[calc(100vh-96px)] mt-16 mb-16 lg:mt-0 lg:mb-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.7 }}
