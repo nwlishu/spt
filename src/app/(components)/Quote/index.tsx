@@ -55,7 +55,7 @@ const Quote: React.FC = () => {
   ];
 
   return (
-    <section className="bg-white py-24 px-8">
+    <section className="bg-white md:py-24 px-8">
       <div className="container mx-auto max-w-full">
         {/* Main Quote Section */}
         <motion.div
