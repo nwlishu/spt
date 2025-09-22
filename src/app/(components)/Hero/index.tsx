@@ -44,9 +44,9 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative mt-21 mx-4 md:mx-18 overflow-hidden">
+    <section className="relative mt-28 mx-4 md:mx-18 overflow-hidden">
       {/* Background Images Container */}
-      <div className="absolute inset-0 z-0 rounded-xl overflow-hidden">
+      <div className="absolute inset-0 z-0  overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}

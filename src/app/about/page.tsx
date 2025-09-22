@@ -6,10 +6,10 @@ import Link from "next/link";
 
 const AboutUs: React.FC = () => {
   const stats = [
-    { icon: Calendar, value: "30+", label: "Years Experience" },
-    { icon: Users, value: "700+", label: "Trusted Customers" },
-    { icon: Wrench, value: "1000+", label: "Product Lines" },
-    { icon: Target, value: "100%", label: "Customer Satisfaction" },
+    { icon: Calendar, value: "30+", label: "ปีแห่งประสบการณ์" },
+    { icon: Users, value: "700+", label: "ลูกค้าที่ไว้วางใจ" },
+    { icon: Wrench, value: "1000+", label: "ผลิตภัณฑ์" },
+    { icon: Target, value: "100%", label: "ความพึงพอใจของลูกค้า" },
   ];
 
   const container = {

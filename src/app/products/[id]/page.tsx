@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import data from "../data.json";
+import data from "../products.json";
 
 type Product = {
   id: number;
@@ -14,8 +14,8 @@ type Product = {
   price: number;
   originalPrice?: number;
   category: string;
-  inStock: boolean;
-  rating: number;
+  inStock?: boolean;
+  rating?: number;
   specs?: Record<string, string>;
 };
 
@@ -33,20 +33,20 @@ type CatalogProduct = {
 
 const catalog: CatalogProduct[] = data as unknown as CatalogProduct[];
 
-function formatPrice(value: number) {
-  return `฿${value.toLocaleString()}`;
-}
+// function formatPrice(value: number) {
+//   return `฿${value.toLocaleString()}`;
+// }
 
-function renderStars(rating: number) {
-  const full = Math.floor(rating);
-  const half = rating % 1 !== 0;
-  const stars: React.ReactNode[] = [];
-  for (let i = 0; i < full; i++) stars.push(<span key={`f-${i}`}>★</span>);
-  if (half) stars.push(<span key="h">☆</span>);
-  for (let i = stars.length; i < 5; i++)
-    stars.push(<span key={`e-${i}`}>☆</span>);
-  return <span className="text-yellow-500">{stars}</span>;
-}
+// function renderStars(rating: number) {
+//   const full = Math.floor(rating);
+//   const half = rating % 1 !== 0;
+//   const stars: React.ReactNode[] = [];
+//   for (let i = 0; i < full; i++) stars.push(<span key={`f-${i}`}>★</span>);
+//   if (half) stars.push(<span key="h">☆</span>);
+//   for (let i = stars.length; i < 5; i++)
+//     stars.push(<span key={`e-${i}`}>☆</span>);
+//   return <span className="text-yellow-500">{stars}</span>;
+// }
 
 type TabKey = "description" | "specs" | "shipping";
 const tabs: { key: TabKey; label: string }[] = [
@@ -125,11 +125,11 @@ export default function ProductDetailPage({
                     Save {formatPrice(product.originalPrice - product.price)}
                   </div>
                 )} */}
-              {!product.inStock && (
+              {/* {!product.inStock && (
                 <div className="absolute inset-0 bg-black/40 text-white flex items-center justify-center text-lg font-semibold">
                   Out of Stock
                 </div>
-              )}
+              )} */}
             </div>
 
             <div className="mt-4 grid grid-cols-4 sm:grid-cols-5 gap-3">
@@ -162,10 +162,10 @@ export default function ProductDetailPage({
             </h1>
 
             <div className="mt-2 flex items-center gap-3 text-sm text-gray-600">
-              <span className="inline-flex items-center gap-1">
+              {/* <span className="inline-flex items-center gap-1">
                 {renderStars(product.rating)}
                 <span className="ml-1">{product.rating.toFixed(1)}</span>
-              </span>
+              </span> */}
               <span className="w-px h-4 bg-gray-300" />
               <span className="inline-flex items-center gap-1">
                 <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
@@ -178,12 +178,12 @@ export default function ProductDetailPage({
                 </span>
               </span>
             </div>
-
+{/* 
             <div className="mt-5 flex items-end gap-3">
               <span className="text-3xl font-extrabold text-[#21286E]">
                 {formatPrice(product.price)}
               </span>
-            </div>
+            </div> */}
 
             {/* Quantity and CTA */}
             <div className="mt-6  items-center gap-3">
@@ -427,7 +427,7 @@ export default function ProductDetailPage({
                       {rp.category}
                     </div>
                   </div>
-                  <div className="p-4">
+                  {/* <div className="p-4">
                     <div className="flex items-center justify-between">
                       <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
                         {rp.title}
@@ -446,7 +446,7 @@ export default function ProductDetailPage({
                         </span>
                       )}
                     </div>
-                  </div>
+                  </div> */}
                 </Link>
               ))}
           </div>

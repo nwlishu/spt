@@ -41,7 +41,7 @@ const ContactPage: React.FC = () => {
                 // transition={{ duration: 0.8 }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffff]"
               >
-                Get In Touch
+                ติดต่อเรา
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -50,8 +50,7 @@ const ContactPage: React.FC = () => {
                 transition={{ duration: 0.8 }}
                 className="text-white text-lg mt-2 sm:mt-3 max-w-2xl mx-auto"
               >
-                Ready to transform your lawn? Contact us for expert advice,
-                product information, or to schedule a service appointment.
+              ติดต่อเราสำหรับคำปรึกษาจากผู้เชี่ยวชาญ ข้อมูลสินค้า 
               </motion.p>
             </div>
           </section>
@@ -72,23 +71,21 @@ const ContactPage: React.FC = () => {
                 variants={fadeInUp}
               >
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Business Hours
+                  เวลาทำการ
                 </h3>
                 <div className="space-y-3 text-gray-600">
-                  {[
-                    { day: "Monday - Friday", time: "8:00 AM - 6:00 PM" },
-                    { day: "Saturday", time: "9:00 AM - 5:00 PM" },
-                    { day: "Sunday", time: "10:00 AM - 4:00 PM" },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex justify-between"
-                      variants={fadeInUp}
-                    >
-                      <span>{item.day}</span>
-                      <span className="font-medium">{item.time}</span>
-                    </motion.div>
-                  ))}
+                  {[{ day: "จันทร์ - เสาร์", time: " 08.30 - 17.30 น." }].map(
+                    (item, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex justify-between"
+                        variants={fadeInUp}
+                      >
+                        <span>{item.day}</span>
+                        <span className="font-medium">{item.time}</span>
+                      </motion.div>
+                    )
+                  )}
                 </div>
               </motion.div>
 
@@ -102,18 +99,17 @@ const ContactPage: React.FC = () => {
                 </h3>
                 {[
                   {
-                    title: "Address",
+                    title: "ที่อยู่",
                     icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z",
                     text: (
                       <>
-                        เลขที่ 140 ถนนปากน้ำกระโจมทอง แขวงบางพรม
-            
-                        เขตตลิ่งชัน กรุงเทพมหานคร 10170
+                        เลขที่ 140 ถนนปากน้ำกระโจมทอง แขวงบางพรม เขตตลิ่งชัน
+                        กรุงเทพมหานคร 10170
                       </>
                     ),
                   },
                   {
-                    title: "Phone",
+                    title: "โทร",
                     icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
                     text: (
                       <>
@@ -121,14 +117,12 @@ const ContactPage: React.FC = () => {
                         <br />
                         081-624-9645 (มือถือสำนักงาน)
                         <br />
-                        092-542-6955 (ฝ่ายขาย)
-                        <br />
                         099-353-6697 (ฝ่ายขายออนไลน์)
                       </>
                     ),
                   },
                   {
-                    title: "Email",
+                    title: "อีเมล",
                     icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
                     text: <>sptparttrading.official@gmail.com</>,
                   },
@@ -210,28 +204,28 @@ const ContactPage: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-              Why Choose LawnMaster Pro?
+              เพราะต้องเลือก ร้านต.ทวีกิจ?
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  title: "Expert Service",
-                  desc: "20+ years of lawn mower expertise and certified technicians.",
+                  title: "บริการโดยผู้เชี่ยวชาญ",
+                  desc: "มากกว่า 20 ปีแห่งความเชี่ยวชาญด้านเครื่องตัดหญ้า",
                   icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
                 },
                 {
-                  title: "Fast Response",
-                  desc: "Same-day service calls and quick turnaround on repairs.",
+                  title: "บริการทันใจ",
+                  desc: "บริการรวดเร็วทันใจ",
                   icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
                 },
                 {
-                  title: "Best Prices",
-                  desc: "Competitive pricing and price matching on all lawn mowers.",
+                  title: "ราคาดีที่สุด",
+                  desc: "ราคาคุ้มค่า พร้อมเทียบและรับประกันราคาที่ดีที่สุด",
                   icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
                 },
                 {
-                  title: "Warranty",
-                  desc: "Comprehensive warranty coverage and guaranteed satisfaction.",
+                  title: "การรับประกันมั่นใจ",
+                  desc: "ครอบคลุมการรับประกันครบถ้วน พร้อมความพึงพอใจที่คุณไว้วางใจได้",
                   icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
                 },
               ].map((item, index) => (

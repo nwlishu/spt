@@ -9,18 +9,18 @@ import React, {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import data from "./data.json";
+import data from "./products.json";
 
 type Product = {
   id: number;
   title: string;
   description: string;
   image: string[];
-  price: number;
+  price?: number;
   originalPrice?: number;
   category: string;
-  inStock: boolean;
-  rating: number;
+  inStock?: boolean;
+  rating?: number;
 };
 
 const allProducts: Product[] = data;
@@ -54,7 +54,7 @@ const categories: string[] = [
   "มือเร่งเครื่องตัดหญ้า",
 ];
 
-const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
+// const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -182,7 +182,21 @@ export default function ProductsPage() {
                   isCatOpen ? "rotate-180" : ""
                 }`}
               >
-                ⌄
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="4"
+                    d="M36 18L24 30L12 18"
+                  />
+                </svg>
               </span>
             </button>
 
@@ -241,7 +255,17 @@ export default function ProductsPage() {
                 className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none ring-0 focus:border-[#21286E]"
               />
               <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-                ⌕
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M19 3C13.488 3 9 7.488 9 13c0 2.395.84 4.59 2.25 6.313L3.281 27.28l1.439 1.44l7.968-7.969A9.92 9.92 0 0 0 19 23c5.512 0 10-4.488 10-10S24.512 3 19 3m0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8s-8-3.57-8-8s3.57-8 8-8"
+                  />
+                </svg>
               </span>
             </div>
           </div>
@@ -277,22 +301,22 @@ export default function ProductsPage() {
                       <span className="rounded-full bg-yellow-400/95 text-[#21286E] px-3 py-1 text-xs font-bold">
                         {p.category}
                       </span>
-                      {!p.inStock && (
+                      {/* {!p.inStock && (
                         <span className="rounded-full bg-red-500 text-white px-3 py-1 text-xs font-semibold">
                           Out of Stock
                         </span>
-                      )}
+                      )} */}
                     </div>
                     {/* {p.originalPrice && p.originalPrice > p.price && (
                       <div className="absolute right-3 top-3 rounded-full bg-red-500 text-white px-3 py-1 text-xs font-semibold">
-                        Save {formatPrice(p.originalPrice - p.price)}
+                       kkk
                       </div>
                     )} */}
                   </Link>
 
                   {/* Content */}
                   <div className="flex flex-col flex-1 p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 line-clamp-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                       <Link
                         href={`/products/${p.id}`}
                         className="hover:underline"
@@ -301,23 +325,12 @@ export default function ProductsPage() {
                       </Link>
                     </h3>
 
-                    {/* <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-      {p.description}
-    </p> */}
+                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                      {p.description}dfdfd
+                    </p>
 
                     {/* Push price + button down */}
                     <div className="mt-auto">
-                      <div className="flex items-end justify-between">
-                        <div className="flex flex-col">
-                          <span className="text-xl sm:text-2xl font-bold text-[#21286E]">
-                            {formatPrice(p.price)}
-                          </span>
-                        </div>
-                        <div className="text-xs sm:text-sm text-gray-500">
-                          ⭐ {p.rating.toFixed(1)}
-                        </div>
-                      </div>
-
                       <div className="mt-4">
                         <Link
                           href={`/products/${p.id}`}

@@ -36,9 +36,9 @@ const Quote: React.FC = () => {
   const stats: StatCardProps[] = [
     {
       label: "ก่อตั้งเมื่อ",
-      value: "2541",
+      value: "2530",
       description:
-        "เราได้ให้ความสำคัญในการปฏิบัติตามมาตรฐาน ISO และ GMP สำหรับทุกผลิตภัณฑ์ของเรา",
+        "เริ่มต้นจากร้านเล็กๆ ใส่ใจในคุณภาพสินค้า และบริการ สู่ผู้เชี่ยวชาญชิ้นส่วนเกษตรที่ลูกค้าต่างไว้วางใจ",
     },
     {
       label: "ลูกค้าที่พึงพอใจ",
@@ -67,7 +67,7 @@ const Quote: React.FC = () => {
         >
           {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#21286E] mb-12 tracking-tight leading-tight">
-            Delivering the right parts, with quality you can rely on.
+          เริ่มต้นจาก ร้านต.ทวีกิจ
           </h1>
 
           {/* Quote */}
@@ -95,7 +95,7 @@ const Quote: React.FC = () => {
 
         {/* Statistics Section */}
         <motion.div
-          className=" bg-yellow-500 py-16 px-8 md:px-12 lg:px-16 rounded-3xl"
+          className=" bg-yellow-500 mb-12 py-16 px-8 md:px-12 lg:px-16 rounded-3xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}

@@ -1,5 +1,6 @@
 import React from "react";
 import { RotateCcw, Shield, Truck } from "lucide-react";
+import { motion } from "framer-motion";
 
 const ServiceGuaranteeSection: React.FC = () => {
   return (
@@ -7,15 +8,27 @@ const ServiceGuaranteeSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-2">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-2"
+          >
             การบริการลูกค้า
-          </h2>
+          </motion.h2>
         </div>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12"
+        >
           {/* Exchange/Return Policy */}
-          <div className="flex flex-col items-center text-center">
+          <motion.div className="flex flex-col items-center text-center border border-yellow-600 p-16 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="mb-6">
               <RotateCcw className="w-16 h-16 text-black" strokeWidth={1.5} />
             </div>
@@ -23,21 +36,21 @@ const ServiceGuaranteeSection: React.FC = () => {
               รับเปลี่ยน-คืนสินค้า
             </h3>
             <p className="text-gray-600 text-lg">ภายใน 7 วัน</p>
-          </div>
+          </motion.div>
 
           {/* 1 Year Warranty */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center border border-yellow-600 p-16 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="mb-6">
               <Shield className="w-16 h-16 text-black" strokeWidth={1.5} />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               รับประกัน 1 ปี
             </h3>
-            <p className="text-gray-500 text-sm">(เฉพาะสินค้าหรือของขนตฺ)</p>
+            <p className="text-gray-600 text-lg">(เฉพาะรายการสินค้าที่กำหนด)</p>
           </div>
 
           {/* Fast Delivery */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center border border-yellow-600 p-16 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
             <div className="mb-6">
               <Truck className="w-16 h-16 text-black" strokeWidth={1.5} />
             </div>
@@ -45,7 +58,7 @@ const ServiceGuaranteeSection: React.FC = () => {
               จัดส่งเร็วทั่วประเทศ
             </h3>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
