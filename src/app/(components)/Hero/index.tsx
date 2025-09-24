@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HeroSection: React.FC = () => {
   const heroImages = [
-    "/hero4.webp",
+    "/hero1.webp",
     "/hero5.webp", 
     "/hero6.webp",
   ];
