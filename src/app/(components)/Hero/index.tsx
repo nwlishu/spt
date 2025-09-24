@@ -6,11 +6,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HeroSection: React.FC = () => {
-  const heroImages = [
-    "/hero1.webp",
-    "/hero5.webp", 
-    "/hero6.webp",
-  ];
+  const heroImages = ["/hero1.webp", "/hero5.webp", "/hero6.webp"];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -65,14 +61,13 @@ const HeroSection: React.FC = () => {
             />
           </motion.div>
         </AnimatePresence>
-   
       </div>
 
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
         className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-10 
-                   bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 
+                   bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-1 md:p-3 
                    transition-all duration-300 hover:scale-110"
         aria-label="Previous image"
       >
@@ -82,7 +77,7 @@ const HeroSection: React.FC = () => {
       <button
         onClick={goToNext}
         className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-10 
-                   bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 
+                   bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-1 md:p-3 
                    transition-all duration-300 hover:scale-110"
         aria-label="Next image"
       >
