@@ -115,8 +115,8 @@
     {
         "id": 11,
         "image": [
-            "/products/คลัชผ้า + สปริง RBC411-2 2ขา (TRUMPET)/คลัชผ้าRBC411(1).webp",
-            "/products/คลัชผ้า + สปริง RBC411-2 2ขา (TRUMPET)/คลัชผ้าRBC411.webp"
+            "/products/คลัชผ้า + สปริง RBC411-2 2ขา (TRUMPET)/คลัชผ้าRBC411.webp",
+            "/products/คลัชผ้า + สปริง RBC411-2 2ขา (TRUMPET)/คลัชผ้าRBC411(1).webp"
         ],
         "title": "คลัชผ้า + สปริง RBC411-2 2ขา (TRUMPET)",
         "description": "คลัชผ้า",
@@ -126,8 +126,8 @@
     {
         "id": 12,
         "image": [
-            "/products/คลัชผ้า UT31-UMK435 (ARANIC)/คลัชผ้าUT31UMK435(1).webp",
-            "/products/คลัชผ้า UT31-UMK435 (ARANIC)/คลัชผ้าUT31UMK435.webp"
+            "/products/คลัชผ้า UT31-UMK435 (ARANIC)/คลัชผ้าUT31UMK435.webp",
+            "/products/คลัชผ้า UT31-UMK435 (ARANIC)/คลัชผ้าUT31UMK435(1).webp"
         ],
         "title": "คลัชผ้า UT31/UMK435 (ARANIC)",
         "description": "คลัชผ้า",
@@ -161,6 +161,7 @@
         "image": [
             "/products/คลัชผ้า TD40-TD33-CG328 (TRUMPET) /คลัชผ้าTD40(1).webp",
             "/products/คลัชผ้า TD40-TD33-CG328 (TRUMPET) /คลัชผ้าTD40.webp"
+            
         ],
         "title": "คลัชผ้า TD40/TD33/CG328 (TRUMPET)",
         "description": "คลัชผ้า",
@@ -169,9 +170,9 @@
     },
     {
         "id": 16,
-        "image": [
-            "/products/ชุดคลัชผ้า NB411 ขาเหล็ก H-L (TRUMPET)/ชุดคลัชผ้าNB411ครบชุด(1).webp",
-            "/products/ชุดคลัชผ้า NB411 ขาเหล็ก H-L (TRUMPET)/ชุดคลัชผ้าNB411ครบชุด.webp"
+        "image": [ 
+            "/products/ชุดคลัชผ้า NB411 ขาเหล็ก H-L (TRUMPET)/ชุดคลัชผ้าNB411ครบชุด.webp",
+            "/products/ชุดคลัชผ้า NB411 ขาเหล็ก H-L (TRUMPET)/ชุดคลัชผ้าNB411ครบชุด(1).webp"
         ],
         "title": "ชุดคลัชผ้า NB411 ขาเหล็ก H/L (TRUMPET)",
         "description": "คลัชผ้า",
@@ -181,8 +182,8 @@
     {
         "id": 17,
         "image": [
-            "/products/ชุดคลัชผ้า RBC411-2 2ขา H-L (TRUMPET) /ชุดคลัชผ้าRBC411ครบชุด(1).webp",
-            "/products/ชุดคลัชผ้า RBC411-2 2ขา H-L (TRUMPET) /ชุดคลัชผ้าRBC411ครบชุด.webp"
+            "/products/ชุดคลัชผ้า RBC411-2 2ขา H-L (TRUMPET) /ชุดคลัชผ้าRBC411ครบชุด.webp",
+            "/products/ชุดคลัชผ้า RBC411-2 2ขา H-L (TRUMPET) /ชุดคลัชผ้าRBC411ครบชุด(1).webp"
         ],
         "title": "ชุดคลัชผ้า RBC411-2 2ขา H/L (TRUMPET)",
         "description": "คลัชผ้า",
@@ -192,8 +193,8 @@
     {
         "id": 18,
         "image": [
-            "/products/ชุดคลัชเหล็ก NB411 (TRUMPET)/ชุดเหล็กNB411ครบชุด(1).webp",
-            "/products/ชุดคลัชเหล็ก NB411 (TRUMPET)/ชุดเหล็กNB411ครบชุด.webp"
+            "/products/ชุดคลัชเหล็ก NB411 (TRUMPET)/ชุดเหล็กNB411ครบชุด.webp",
+            "/products/ชุดคลัชเหล็ก NB411 (TRUMPET)/ชุดเหล็กNB411ครบชุด(1).webp"
         ],
         "title": "ชุดคลัชเหล็ก NB411 (TRUMPET)",
         "description": "คลัชผ้า",
@@ -203,8 +204,8 @@
     {
         "id": 19,
         "image": [
-            "/products/คลัชผ้า T200 (TRUMPET)/คลัชผ้าT200(1).webp",
-            "/products/คลัชผ้า T200 (TRUMPET)/คลัชผ้าT200.webp"
+            "/products/คลัชผ้า T200 (TRUMPET)/คลัชผ้าT200.webp",
+            "/products/คลัชผ้า T200 (TRUMPET)/คลัชผ้าT200(1).webp"
         ],
         "title": "คลัชผ้า T200 (TRUMPET)",
         "description": "คลัชผ้า",
