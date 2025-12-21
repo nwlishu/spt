@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useRef,
   useCallback,
+  Suspense,
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +25,7 @@ type Product = {
   rating?: number;
 };
 
-export default function ProductsPage() {
+function ProductsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -505,5 +506,22 @@ export default function ProductsPage() {
         )}
       </section>
     </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#21286E] border-r-transparent"></div>
+            <p className="mt-4 text-gray-600">Loading products...</p>
+          </div>
+        </div>
+      }
+    >
+      <ProductsContent />
+    </Suspense>
   );
 }

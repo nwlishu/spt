@@ -9,6 +9,7 @@ const roboto = Noto_Sans_Thai({
   display: "swap",
 });
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.sptparttrading.com'),
   title:
     "SPT PART TRADING CO.,LTD | บริษัท เอส พี ที พาร์ท เทรดดิ้ง จำกัด (ร้านต.ทวีกิจ)",
   description:
