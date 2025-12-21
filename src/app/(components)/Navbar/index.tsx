@@ -8,8 +8,84 @@ import TopBar from "../Topbar";
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isProductOpen, setIsProductOpen] = useState(false);
 
-  // Handle scroll effect
+  // Dropdown menu data structure
+  const dropdownMenuData = [
+    {
+      title: "อะไหล่เครื่องตัดหญ้า",
+      items: [
+        // { label: "กระบอกเพลา", href: "#", isLink: true },
+        // { label: "ขาตั้งเครื่อง", href: "#", isLink: true },
+        // { label: "คลัชผ้า", href: "#", isLink: true },
+        // { label: "คอยล์ CDI", href: "#", isLink: true },
+        // { label: "คาร์บูเรเตอร์", href: "#", isLink: true },
+        // { label: "จานเอ็นตัดหญ้า ", href: "#", isLink: true },
+        // { label: "ชุดสตาร์ท", href: "#", isLink: true },
+        // { label: "ถังน้ำมัน", href: "#", isLink: true },
+        // { label: "ถ้วยคลัช", href: "#", isLink: true },
+        // { label: "ถ้วยยึดใบมีด", href: "#", isLink: true },
+        // { label: "ที่กันหญ้า", href: "#", isLink: true },
+        // { label: "ท่อไอเสีย", href: "#", isLink: true },
+        // { label: "ที่ล็อคเพลา", href: "#", isLink: true },
+        // { label: "น็อตเกลียวซ้าย", href: "#", isLink: true },
+        // { label: "ปะเก็นชุด", href: "#", isLink: true },
+        // { label: "มือเร่งพร้อมสวิทช์", href: "#", isLink: true },
+        // { label: "สกรูเกลียวซ้าย", href: "#", isLink: true },
+        // { label: "สายข้ออ่อน", href: "#", isLink: true },
+        // { label: "สายคันเร่ง", href: "#", isLink: true },
+        // { label: "สายสะพาย", href: "#", isLink: true },
+        // { label: "สายเอ็นตัดหญ้า", href: "#", isLink: true },
+        // { label: "อุปกรณ์ป้องกัน", href: "#", isLink: true },
+        // { label: "หน้าแปลนกกหาง", href: "#", isLink: true },
+        // { label: "หม้อกรองอากาศ", href: "#", isLink: true },
+        // { label: "หัวเกียร์", href: "#", isLink: true },
+        // { label: "หัวเทียน TTK", href: "#", isLink: true },
+        // { label: "หูเกี่ยวสายสะพาย", href: "#", isLink: true },
+        // { label: "เสื้อสูบ+ชุดลูกสูบ", href: "#", isLink: true },
+        // { label: "แกนเพลา", href: "#", isLink: true },
+        // { label: "ใบมีดตัดหญ้า", href: "#", isLink: true },
+      ],
+    },
+    {
+      title: "อะไหล่เครื่องพ่นยา",
+      items: [
+        // { label: "Baby & Toddler", href: "#", isLink: false },
+        // { label: "Little Kids", href: "#", isLink: false },
+        // { label: "Big Kids", href: "#", isLink: false },
+        // { label: "Boys", href: "#", isLink: false },
+        // { label: "Girls", href: "#", isLink: false },
+      ],
+    },
+    {
+      title: "อะไหล่ปั๊มชัก",
+      items: [
+        // { label: "All Shoes", href: "#", isLink: false },
+        // { label: "High Top", href: "#", isLink: false },
+        // { label: "Low Top", href: "#", isLink: false },
+        // { label: "Slip-ons", href: "#", isLink: false },
+      ],
+    },
+    {
+      title: "ซีล",
+      items: [
+        // { label: "T-Shirts", href: "#", isLink: false },
+        // { label: "Jackets", href: "#", isLink: false },
+        // { label: "Pants & Shorts", href: "#", isLink: false },
+        // { label: "Matching Sets", href: "#", isLink: false },
+      ],
+    },
+    {
+      title: "คอนเดนเซอร์",
+      items: [
+        // { label: "T-Shirts", href: "#", isLink: false },
+        // { label: "Jackets", href: "#", isLink: false },
+        // { label: "Pants & Shorts", href: "#", isLink: false },
+        // { label: "Matching Sets", href: "#", isLink: false },
+      ],
+    },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -19,7 +95,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -35,16 +110,15 @@ const Navbar: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <>
-      <nav
-        className={`bg-white  fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "shadow-lg" : ""
-        }`}
-      >
-        <TopBar/>
+    <nav
+      className={`bg-background fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "shadow-lg" : ""
+      }`}
+    >
+      <TopBar />
 
-      <div className="py-4 px-6">
-        <div className="container mx-auto flex items-center justify-between navbar-container">
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between navbar-container">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="">
@@ -66,12 +140,84 @@ const Navbar: React.FC = () => {
             >
               เกี่ยวกับเรา
             </Link>
-            <Link
-              href="/products"
-              className="text-[#21286E] hover:text-blue-600 transition-colors font-bold"
+
+            {/* Fixed Dropdown - wrapper contains both trigger and dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsProductOpen(true)}
+              onMouseLeave={() => setIsProductOpen(false)}
             >
-              สินค้า
-            </Link>
+              <Link
+                href="/products?page=1"
+                className="text-[#21286E] hover:text-blue-600 font-bold cursor-pointer py-4 flex items-center gap-1 transition-colors"
+              >
+                สินค้า
+                <svg
+                  className={`w-4 h-4 transition-all duration-200 ${
+                    isProductOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Link>
+
+              {/* Dropdown with padding-top to bridge the gap */}
+              <div
+                className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-200 ${
+                  isProductOpen
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <div className="bg-dropdown border border-border rounded-xl shadow-dropdown min-w-[900px] p-8 bg-white">
+                  <div className="grid grid-cols-5 gap-8 text-sm">
+                    {dropdownMenuData.map((column, columnIndex) => (
+                      <div key={columnIndex}>
+                        <Link
+                          href={`/products?page=1&category=${encodeURIComponent(column.title)}`}
+                          className="font-bold text-[#21286E] hover:text-blue-600 text-center cursor-pointer transition-colors block"
+                          onClick={() => setIsProductOpen(false)}
+                        >
+                          {column.title}
+                        </Link>
+                        {/* <ul
+                          className={`space-y-3 ${
+                            column.items[0]?.isLink
+                              ? ""
+                              : "text-muted-foreground"
+                          }`}
+                        >
+                          {column.items.map((item, itemIndex) => (
+                            <li key={itemIndex}>
+                              {item.isLink ? (
+                                <Link
+                                  href={item.href}
+                                  className="text-muted-foreground hover:text-nav-hover transition-colors"
+                                >
+                                  {item.label}
+                                </Link>
+                              ) : (
+                                <span className="hover:text-nav-hover transition-colors cursor-pointer">
+                                  {item.label}
+                                </span>
+                              )}
+                            </li>
+                          ))}
+                        </ul> */}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Desktop Contact Button */}
@@ -111,7 +257,7 @@ const Navbar: React.FC = () => {
             isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           } overflow-hidden`}
         >
-          <div className="bg-white border-t border-gray-200 py-4 px-6 space-y-4">
+          <div className="bg-background border-t border-border py-4 space-y-4">
             <Link
               href="/"
               className="block text-[#21286E] hover:text-blue-600 transition-colors font-bold py-2"
@@ -140,9 +286,8 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
         </div>
-        </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
 

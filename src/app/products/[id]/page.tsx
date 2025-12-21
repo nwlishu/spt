@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import data from "../products.json";
+import { supabase } from "@/lib/supabase";
 
 type Product = {
   id: number;
@@ -31,7 +31,17 @@ type CatalogProduct = {
   rating: number;
 };
 
-const catalog: CatalogProduct[] = data as unknown as CatalogProduct[];
+type SupabaseProduct = {
+  id: number;
+  title: string;
+  description: string;
+  image_urls: string[];
+  price: number;
+  original_price?: number;
+  category: string;
+  in_stock: boolean;
+  rating: number;
+};
 
 // function formatPrice(value: number) {
 //   return `฿${value.toLocaleString()}`;
@@ -63,15 +73,89 @@ export default function ProductDetailPage({
   const { id } = React.use(params);
 
   const productId = Number(id);
-  const item = useMemo(
-    () => catalog.find((p) => p.id === productId),
-    [productId]
-  );
 
   // Hooks must be called unconditionally (before potential early returns)
+  const [item, setItem] = useState<CatalogProduct | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<CatalogProduct[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState(0);
   // const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<TabKey>("description");
+
+  // Fetch product from Supabase
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        setLoading(true);
+
+        // Fetch the specific product
+        const { data: productData, error: productError } = await supabase
+          .from("products")
+          .select("*")
+          .eq("id", productId)
+          .single();
+
+        if (productError) throw productError;
+
+        if (productData) {
+          const transformedProduct: CatalogProduct = {
+            id: productData.id,
+            title: productData.title,
+            description: productData.description,
+            image: productData.image_urls || [],
+            price: productData.price,
+            originalPrice: productData.original_price,
+            category: productData.category,
+            inStock: productData.in_stock ?? true,
+            rating: productData.rating,
+          };
+          setItem(transformedProduct);
+
+          // Fetch related products (same category, exclude current product)
+          const { data: relatedData } = await supabase
+            .from("products")
+            .select("*")
+            .eq("category", productData.category)
+            .neq("id", productId)
+            .limit(3);
+
+          if (relatedData) {
+            const transformedRelated: CatalogProduct[] = relatedData.map(
+              (item: SupabaseProduct) => ({
+                id: item.id,
+                title: item.title,
+                description: item.description,
+                image: item.image_urls || [],
+                price: item.price,
+                originalPrice: item.original_price,
+                category: item.category,
+                inStock: item.in_stock ?? true,
+                rating: item.rating,
+              })
+            );
+            setRelatedProducts(transformedRelated);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#21286E] border-r-transparent"></div>
+          <p className="mt-4 text-gray-600">Loading product...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!item) return notFound();
 
@@ -91,20 +175,21 @@ export default function ProductDetailPage({
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="pt-20" />
+      {/* Account for fixed navbar height (TopBar + Navbar) */}
+      <div className="h-32" />
 
       {/* Breadcrumbs */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-gray-600">
+      {/* <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-600">
         <Link href="/" className="hover:underline">
-          Home
+          หน้าแรก
         </Link>
         <span className="mx-2">/</span>
         <Link href="/products" className="hover:underline">
-          Products
+          สินค้า
         </Link>
         <span className="mx-2">/</span>
         <span className="text-gray-900 font-medium">{product.title}</span>
-      </nav>
+      </nav> */}
 
       {/* Main Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
@@ -178,7 +263,7 @@ export default function ProductDetailPage({
                 </span>
               </span>
             </div>
-{/* 
+            {/* 
             <div className="mt-5 flex items-end gap-3">
               <span className="text-3xl font-extrabold text-[#21286E]">
                 {formatPrice(product.price)}
@@ -407,27 +492,24 @@ export default function ProductDetailPage({
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {catalog
-              .filter((rp) => rp.id !== product.id)
-              .slice(0, 3)
-              .map((rp) => (
-                <Link
-                  key={rp.id}
-                  href={`/products/${rp.id}`}
-                  className="group overflow-hidden rounded-2xl bg-white shadow hover:shadow-md transition"
-                >
-                  <div className="relative h-80">
-                    <Image
-                      src={rp.image[0]}
-                      alt={rp.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute left-3 top-3 rounded-full bg-yellow-400/95 text-[#21286E] px-3 py-1 text-xs font-bold">
-                      {rp.category}
-                    </div>
+            {relatedProducts.map((rp) => (
+              <Link
+                key={rp.id}
+                href={`/products/${rp.id}`}
+                className="group overflow-hidden rounded-2xl bg-white shadow hover:shadow-md transition"
+              >
+                <div className="relative h-80">
+                  <Image
+                    src={rp.image[0]}
+                    alt={rp.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute left-3 top-3 rounded-full bg-yellow-400/95 text-[#21286E] px-3 py-1 text-xs font-bold">
+                    {rp.category}
                   </div>
-                  {/* <div className="p-4">
+                </div>
+                {/* <div className="p-4">
                     <div className="flex items-center justify-between">
                       <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
                         {rp.title}
@@ -447,8 +529,8 @@ export default function ProductDetailPage({
                       )}
                     </div>
                   </div> */}
-                </Link>
-              ))}
+              </Link>
+            ))}
           </div>
         </div>
       </section>

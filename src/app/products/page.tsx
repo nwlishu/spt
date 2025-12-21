@@ -9,7 +9,8 @@ import React, {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import data from "./products.json";
+import { useRouter, useSearchParams } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 type Product = {
   id: number;
@@ -23,49 +24,141 @@ type Product = {
   rating?: number;
 };
 
-const allProducts: Product[] = data;
-
-const categories: string[] = [
-  "All",
-  "กรองน้ำมัน",
-  "กระบอกเพลา",
-  "ก็อกน้ำมัน",
-  "ก้านสูบ",
-  "แกนเพลา",
-  "แกนเพลาหัวเกียร์/เฟืองเดือยหัวเกียร์",
-  "ขาตั้งเครื่องตัดหญ้า",
-  "คลัชผ้า/เฉพาะสปริงคลัชผ้า/สกรูยึดคลัชผ้า",
-  "คอยล์ CDI",
-  "คาร์บูเรเตอร์",
-  "จานยึดใบมีด",
-  "จานเอ็นตัดหญ้า/หัวเอ็นตัดหญ้า",
-  "ชุดปลอกสายอ่อน/เฉพาะสายข้ออ่อน",
-  "ชุดสตาร์ทเครื่องตัดหญ้า",
-  "ชุดเสื้อสูบพร้อมลูกสูบ",
-  "ตัวแบ่งรับน้ำหนัก/ที่ล็อกเพลา",
-  "ถ้วยคลัช",
-  "ถ้วยยึดใบมีด",
-  "ถังน้ำมัน/เฉพาะฝาถังน้ำมัน",
-  "ท่อไอเสีย",
-  "ที่กันหญ้า",
-  "น็อต/สกรู เกลียวซ้าย",
-  "เบาะหุ้มกระบอก",
-  "ใบมีดตัดหญ้า",
-  "มือเร่งเครื่องตัดหญ้า",
-];
-
-// const formatPrice = (price: number) => `฿${price.toLocaleString()}`;
-
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [categories, setCategories] = useState<string[]>(["ทั้งหมด"]);
+  const [loading, setLoading] = useState(true);
+  const [categoryQuery, setCategoryQuery] = useState("");
   const pageSize = 9;
   const [isCatOpen, setIsCatOpen] = useState(false);
-  const [categoryQuery, setCategoryQuery] = useState("");
   const catRef = useRef<HTMLDivElement | null>(null);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Pagination state (local only)
-  const [currentPage, setCurrentPage] = useState(1);
+  // Get current page and category from URL params
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const urlCategory = searchParams.get("category") || "ทั้งหมด";
+  const urlSearch = searchParams.get("search") || "";
+
+  // Use URL params as state
+  const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory);
+  const [search, setSearch] = useState(urlSearch);
+
+  // Sync state with URL params when they change
+  useEffect(() => {
+    setSelectedCategory(urlCategory);
+    setSearch(urlSearch);
+  }, [urlCategory, urlSearch]);
+
+  // Handle search with debounce and reset to page 1
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      setSearch(value);
+
+      // Clear existing timeout
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+
+      // Set new timeout to reset page after user stops typing
+      searchTimeoutRef.current = setTimeout(() => {
+        const params = new URLSearchParams();
+        params.set("page", "1");
+        if (selectedCategory !== "ทั้งหมด") {
+          params.set("category", selectedCategory);
+        }
+        if (value.trim()) {
+          params.set("search", value);
+        }
+        router.push(`/products?${params.toString()}`);
+      }, 500);
+    },
+    [selectedCategory, router]
+  );
+
+  // Fetch categories on mount
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("category");
+
+        if (error) throw error;
+
+        // Extract unique categories
+        const uniqueCategories = Array.from(
+          new Set((data || []).map((item) => item.category))
+        ).sort();
+        setCategories(["ทั้งหมด", ...uniqueCategories]);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
+  // Fetch products with server-side pagination
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        setLoading(true);
+
+        // Build query
+        let query = supabase
+          .from("products")
+          .select("*", { count: "exact" })
+          .order("id", { ascending: true });
+
+        // Apply category filter
+        if (selectedCategory !== "ทั้งหมด") {
+          query = query.eq("category", selectedCategory);
+        }
+
+        // Apply search filter
+        if (search.trim()) {
+          query = query.or(
+            `title.ilike.%${search}%,description.ilike.%${search}%`
+          );
+        }
+
+        // Apply pagination
+        const from = (currentPage - 1) * pageSize;
+        const to = from + pageSize - 1;
+        query = query.range(from, to);
+
+        const { data, error, count } = await query;
+
+        if (error) throw error;
+
+        // Transform data to match the Product type
+        const transformedProducts: Product[] = (data || []).map((item) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description || "",
+          image: item.image_urls || [],
+          price: item.price,
+          originalPrice: item.original_price,
+          category: item.category,
+          inStock: item.in_stock ?? true,
+          rating: item.rating,
+        }));
+
+        setProducts(transformedProducts);
+        setTotalCount(count || 0);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, [currentPage, selectedCategory, search, pageSize]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -77,51 +170,45 @@ export default function ProductsPage() {
     return () => document.removeEventListener("mousedown", onDown);
   }, []);
 
-  // Filter categories
+  // Cleanup search timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Filter categories for dropdown search
   const filteredCategories = useMemo(() => {
     const q = categoryQuery.trim().toLowerCase();
     return categories.filter((c) => c.toLowerCase().includes(q));
-  }, [categoryQuery]);
+  }, [categoryQuery, categories]);
 
-  // Filter products
-  const filtered = useMemo(() => {
-    return allProducts.filter((p) => {
-      const matchCat =
-        selectedCategory === "All" || p.category === selectedCategory;
-      const term = search.trim().toLowerCase();
-      const matchSearch =
-        !term ||
-        p.title.toLowerCase().includes(term) ||
-        p.description.toLowerCase().includes(term);
-      return matchCat && matchSearch;
-    });
-  }, [selectedCategory, search]);
-
-  // Reset page when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, search]);
-
-  // Pagination calculations
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  // Pagination calculations using server-side count
+  const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
   const safePage = Math.min(currentPage, totalPages);
 
-  const paginated = useMemo(() => {
-    const start = (safePage - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, safePage, pageSize]);
+  const startItem = totalCount === 0 ? 0 : (safePage - 1) * pageSize + 1;
+  const endItem = Math.min(totalCount, safePage * pageSize);
 
-  const startItem = filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1;
-  const endItem = Math.min(filtered.length, safePage * pageSize);
-
-  // Go to page
+  // Go to page - update URL while preserving other params
   const goToPage = useCallback(
     (page: number) => {
       if (page < 1) page = 1;
       if (page > totalPages) page = totalPages;
-      setCurrentPage(page);
+
+      const params = new URLSearchParams();
+      params.set("page", page.toString());
+      if (selectedCategory !== "ทั้งหมด") {
+        params.set("category", selectedCategory);
+      }
+      if (search.trim()) {
+        params.set("search", search);
+      }
+      router.push(`/products?${params.toString()}`);
     },
-    [totalPages]
+    [totalPages, router, selectedCategory, search]
   );
 
   // Pagination numbers
@@ -220,6 +307,16 @@ export default function ProductsPage() {
                         setSelectedCategory(cat);
                         setIsCatOpen(false);
                         setCategoryQuery("");
+                        // Update URL with new category
+                        const params = new URLSearchParams();
+                        params.set("page", "1");
+                        if (cat !== "ทั้งหมด") {
+                          params.set("category", cat);
+                        }
+                        if (search.trim()) {
+                          params.set("search", search);
+                        }
+                        router.push(`/products?${params.toString()}`);
                       }}
                       className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-50 ${
                         selectedCategory === cat
@@ -250,8 +347,8 @@ export default function ProductsPage() {
             <div className="relative w-full sm:w-80">
               <input
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search products..."
+                onChange={(e) => handleSearchChange(e.target.value)}
+                placeholder="ค้นหาสินค้า..."
                 className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none ring-0 focus:border-[#21286E]"
               />
               <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
@@ -274,14 +371,19 @@ export default function ProductsPage() {
 
       {/* Product Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="py-16 text-center text-gray-600">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#21286E] border-r-transparent"></div>
+            <p className="mt-4">Loading products...</p>
+          </div>
+        ) : totalCount === 0 ? (
           <div className="py-16 text-center text-gray-600">
             No products found.
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {paginated.map((p) => (
+              {products.map((p) => (
                 <article
                   key={`${p.id}-${safePage}`}
                   className="group flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg transition-shadow"
@@ -348,7 +450,7 @@ export default function ProductsPage() {
             {/* Pagination Controls */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-sm text-gray-600">
-                Showing {startItem}-{endItem} of {filtered.length}
+                Showing {startItem}-{endItem} of {totalCount}
               </div>
               <div className="flex items-center gap-2">
                 <button
