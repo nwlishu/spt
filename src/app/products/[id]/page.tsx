@@ -6,6 +6,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
+// Force dynamic rendering since we use Supabase
+export const dynamic = 'force-dynamic';
+
 type Product = {
   id: number;
   title: string;
