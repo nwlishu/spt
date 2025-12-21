@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+generate-sku-mapping.mjs
+migrate-products.mjs
+normalize-files.mjs
+products1.s3.json
+rename-files-to-sku.mjs
+upload-to-s3.sh
+update-image-paths.js
+sku-mapping.csv
+sku-mapping.json
+
+# old product data files (now using Supabase)
+src/app/products/data.json
+src/app/products/data1.json
+src/app/products/products1.json
+src/app/products/products1-backup.json
+src/app/products/products1-updated.json
+
+# old product images (now using external URLs from Supabase)
+public/products/
