@@ -44,16 +44,19 @@ function ProductsContent() {
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const urlCategory = searchParams.get("category") || "ทั้งหมด";
   const urlSearch = searchParams.get("search") || "";
+  const urlSubcategory = searchParams.get("subcategory") || "";
 
   // Use URL params as state
   const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory);
   const [search, setSearch] = useState(urlSearch);
+  const [subcategory, setSubcategory] = useState(urlSubcategory);
 
   // Sync state with URL params when they change
   useEffect(() => {
     setSelectedCategory(urlCategory);
     setSearch(urlSearch);
-  }, [urlCategory, urlSearch]);
+    setSubcategory(urlSubcategory);
+  }, [urlCategory, urlSearch, urlSubcategory]);
 
   // Handle search with debounce and reset to page 1
   const handleSearchChange = useCallback(
@@ -72,13 +75,16 @@ function ProductsContent() {
         if (selectedCategory !== "ทั้งหมด") {
           params.set("category", selectedCategory);
         }
+        if (subcategory.trim()) {
+          params.set("subcategory", subcategory);
+        }
         if (value.trim()) {
           params.set("search", value);
         }
         router.push(`/products?${params.toString()}`);
       }, 500);
     },
-    [selectedCategory, router]
+    [selectedCategory, subcategory, router]
   );
 
   // Fetch categories on mount
@@ -121,6 +127,11 @@ function ProductsContent() {
           query = query.eq("category", selectedCategory);
         }
 
+        // Apply subcategory filter (filters by description field)
+        if (subcategory.trim()) {
+          query = query.eq("description", subcategory);
+        }
+
         // Apply search filter
         if (search.trim()) {
           query = query.or(
@@ -160,7 +171,7 @@ function ProductsContent() {
     }
 
     fetchProducts();
-  }, [currentPage, selectedCategory, search, pageSize]);
+  }, [currentPage, selectedCategory, search, subcategory, pageSize]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -205,12 +216,15 @@ function ProductsContent() {
       if (selectedCategory !== "ทั้งหมด") {
         params.set("category", selectedCategory);
       }
+      if (subcategory.trim()) {
+        params.set("subcategory", subcategory);
+      }
       if (search.trim()) {
         params.set("search", search);
       }
       router.push(`/products?${params.toString()}`);
     },
-    [totalPages, router, selectedCategory, search]
+    [totalPages, router, selectedCategory, subcategory, search]
   );
 
   // Pagination numbers
@@ -256,6 +270,32 @@ function ProductsContent() {
       {/* Sticky Filter Bar */}
       <div className="sticky top-16 z-40 border-y border-gray-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col gap-3">
+          {/* Active Filters Display */}
+          {subcategory && (
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm text-gray-600">กรองโดย:</span>
+              <div className="flex items-center gap-2 bg-[#21286E] text-white px-3 py-1 rounded-full text-sm">
+                <span>{subcategory}</span>
+                <button
+                  onClick={() => {
+                    const params = new URLSearchParams();
+                    params.set("page", "1");
+                    if (selectedCategory !== "ทั้งหมด") {
+                      params.set("category", selectedCategory);
+                    }
+                    if (search.trim()) {
+                      params.set("search", search);
+                    }
+                    router.push(`/products?${params.toString()}`);
+                  }}
+                  className="hover:bg-white/20 rounded-full p-0.5"
+                  aria-label="Clear subcategory filter"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          )}
           {/* Category Dropdown */}
           <div ref={catRef} className="relative w-full sm:w-80">
             <button
@@ -309,7 +349,7 @@ function ProductsContent() {
                         setSelectedCategory(cat);
                         setIsCatOpen(false);
                         setCategoryQuery("");
-                        // Update URL with new category
+                        // Update URL with new category (clear subcategory when changing category)
                         const params = new URLSearchParams();
                         params.set("page", "1");
                         if (cat !== "ทั้งหมด") {

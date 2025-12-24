@@ -9,42 +9,43 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(0);
 
   // Dropdown menu data structure
   const dropdownMenuData = [
     {
       title: "อะไหล่เครื่องตัดหญ้า",
       items: [
-        // { label: "กระบอกเพลา", href: "#", isLink: true },
-        // { label: "ขาตั้งเครื่อง", href: "#", isLink: true },
-        // { label: "คลัชผ้า", href: "#", isLink: true },
-        // { label: "คอยล์ CDI", href: "#", isLink: true },
-        // { label: "คาร์บูเรเตอร์", href: "#", isLink: true },
-        // { label: "จานเอ็นตัดหญ้า ", href: "#", isLink: true },
-        // { label: "ชุดสตาร์ท", href: "#", isLink: true },
-        // { label: "ถังน้ำมัน", href: "#", isLink: true },
-        // { label: "ถ้วยคลัช", href: "#", isLink: true },
-        // { label: "ถ้วยยึดใบมีด", href: "#", isLink: true },
-        // { label: "ที่กันหญ้า", href: "#", isLink: true },
-        // { label: "ท่อไอเสีย", href: "#", isLink: true },
-        // { label: "ที่ล็อคเพลา", href: "#", isLink: true },
-        // { label: "น็อตเกลียวซ้าย", href: "#", isLink: true },
-        // { label: "ปะเก็นชุด", href: "#", isLink: true },
-        // { label: "มือเร่งพร้อมสวิทช์", href: "#", isLink: true },
-        // { label: "สกรูเกลียวซ้าย", href: "#", isLink: true },
-        // { label: "สายข้ออ่อน", href: "#", isLink: true },
-        // { label: "สายคันเร่ง", href: "#", isLink: true },
-        // { label: "สายสะพาย", href: "#", isLink: true },
-        // { label: "สายเอ็นตัดหญ้า", href: "#", isLink: true },
-        // { label: "อุปกรณ์ป้องกัน", href: "#", isLink: true },
-        // { label: "หน้าแปลนกกหาง", href: "#", isLink: true },
-        // { label: "หม้อกรองอากาศ", href: "#", isLink: true },
-        // { label: "หัวเกียร์", href: "#", isLink: true },
-        // { label: "หัวเทียน TTK", href: "#", isLink: true },
-        // { label: "หูเกี่ยวสายสะพาย", href: "#", isLink: true },
-        // { label: "เสื้อสูบ+ชุดลูกสูบ", href: "#", isLink: true },
-        // { label: "แกนเพลา", href: "#", isLink: true },
-        // { label: "ใบมีดตัดหญ้า", href: "#", isLink: true },
+        { label: "กระบอกเพลา", href: "#", isLink: true },
+        { label: "ขาตั้งเครื่อง", href: "#", isLink: true },
+        { label: "คลัชผ้า", href: "#", isLink: true },
+        { label: "คอยล์ CDI", href: "#", isLink: true },
+        { label: "คาร์บูเรเตอร์", href: "#", isLink: true },
+        { label: "จานเอ็นตัดหญ้า", href: "#", isLink: true },
+        { label: "ชุดสตาร์ท", href: "#", isLink: true },
+        { label: "ถังน้ำมัน", href: "#", isLink: true },
+        { label: "ถ้วยคลัช", href: "#", isLink: true },
+        { label: "ถ้วยยึดใบมีด", href: "#", isLink: true },
+        { label: "ที่กันหญ้า", href: "#", isLink: true },
+        { label: "ท่อไอเสีย", href: "#", isLink: true },
+        { label: "ที่ล็อคเพลา", href: "#", isLink: true },
+        { label: "น็อตเกลียวซ้าย", href: "#", isLink: true },
+        { label: "ปะเก็นชุด", href: "#", isLink: true },
+        { label: "มือเร่งพร้อมสวิทช์", href: "#", isLink: true },
+        { label: "สกรูเกลียวซ้าย", href: "#", isLink: true },
+        { label: "สายข้ออ่อน", href: "#", isLink: true },
+        { label: "สายคันเร่ง", href: "#", isLink: true },
+        { label: "สายสะพาย", href: "#", isLink: true },
+        { label: "สายเอ็นตัดหญ้า", href: "#", isLink: true },
+        { label: "อุปกรณ์ป้องกัน", href: "#", isLink: true },
+        { label: "หน้าแปลนกกหาง", href: "#", isLink: true },
+        { label: "หม้อกรองอากาศ", href: "#", isLink: true },
+        { label: "หัวเกียร์", href: "#", isLink: true },
+        { label: "หัวเทียน TTK", href: "#", isLink: true },
+        { label: "หูเกี่ยวสายสะพาย", href: "#", isLink: true },
+        { label: "เสื้อสูบ+ชุดลูกสูบ", href: "#", isLink: true },
+        { label: "แกนเพลา", href: "#", isLink: true },
+        { label: "ใบมีดตัดหญ้า", href: "#", isLink: true },
       ],
     },
     {
@@ -178,42 +179,78 @@ const Navbar: React.FC = () => {
                 }`}
               >
                 <div className="bg-dropdown border border-border rounded-xl shadow-dropdown min-w-[900px] p-8 bg-white">
-                  <div className="grid grid-cols-5 gap-8 text-sm">
-                    {dropdownMenuData.map((column, columnIndex) => (
-                      <div key={columnIndex}>
-                        <Link
-                          href={`/products?page=1&category=${encodeURIComponent(column.title)}`}
-                          className="font-bold text-[#21286E] hover:text-blue-600 text-center cursor-pointer transition-colors block"
-                          onClick={() => setIsProductOpen(false)}
-                        >
-                          {column.title}
-                        </Link>
-                        {/* <ul
-                          className={`space-y-3 ${
-                            column.items[0]?.isLink
-                              ? ""
-                              : "text-muted-foreground"
-                          }`}
-                        >
-                          {column.items.map((item, itemIndex) => (
-                            <li key={itemIndex}>
-                              {item.isLink ? (
+                  <div className="grid grid-cols-[200px_1px_1fr] gap-8 text-sm">
+                    {/* Left Column: All Categories */}
+                    <div>
+                      <h3 className="font-bold text-[#21286E] mb-4">หมวดหมู่</h3>
+                      <div className="space-y-3">
+                        {dropdownMenuData.map((column, columnIndex) => (
+                          <div
+                            key={columnIndex}
+                            className={`text-[#21286E] hover:text-blue-600 cursor-pointer transition-colors block ${
+                              selectedCategory === columnIndex ? 'font-bold' : ''
+                            }`}
+                            onMouseEnter={() => setSelectedCategory(columnIndex)}
+                          >
+                            <Link
+                              href={`/products?page=1&category=${encodeURIComponent(
+                                column.title
+                              )}`}
+                              onClick={() => setIsProductOpen(false)}
+                            >
+                              {column.title}
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Vertical Divider */}
+                    <div className="bg-gray-300"></div>
+
+                    {/* Right Column: Subcategories (shown only if they exist) */}
+                    <div className="relative">
+                      {dropdownMenuData[selectedCategory].items.length > 0 ? (
+                        <>
+                          <Link
+                            href={`/products?page=1&category=${encodeURIComponent(
+                              dropdownMenuData[selectedCategory].title
+                            )}`}
+                            className="font-bold text-[#21286E] hover:text-blue-600 cursor-pointer transition-colors block mb-4"
+                            onClick={() => setIsProductOpen(false)}
+                          >
+                            {dropdownMenuData[selectedCategory].title}
+                          </Link>
+                          <ul className="grid grid-cols-2 gap-x-8 gap-y-2 mb-4">
+                            {dropdownMenuData[selectedCategory].items.map((item, itemIndex) => (
+                              <li key={itemIndex}>
                                 <Link
-                                  href={item.href}
-                                  className="text-muted-foreground hover:text-nav-hover transition-colors"
+                                  href={`/products?page=1&subcategory=${encodeURIComponent(item.label)}`}
+                                  className="text-muted-foreground hover:text-blue-600 transition-colors text-sm block"
+                                  onClick={() => setIsProductOpen(false)}
                                 >
                                   {item.label}
                                 </Link>
-                              ) : (
-                                <span className="hover:text-nav-hover transition-colors cursor-pointer">
-                                  {item.label}
-                                </span>
-                              )}
-                            </li>
-                          ))}
-                        </ul> */}
-                      </div>
-                    ))}
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* View All Button */}
+                          {/* <div className="flex justify-end mt-6">
+                            <Link
+                              href={`/products?page=1&category=${encodeURIComponent(
+                                dropdownMenuData[selectedCategory].title
+                              )}`}
+                              onClick={() => setIsProductOpen(false)}
+                            >
+                              <button className="bg-yellow-500 text-[#21286E] px-6 py-2 rounded-lg hover:bg-yellow-400 transition-colors font-bold flex items-center gap-2">
+                                ดูทั้งหมด →
+                              </button>
+                            </Link>
+                          </div> */}
+                        </>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
