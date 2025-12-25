@@ -37,8 +37,22 @@ function ProductsContent() {
   const [categoryQuery, setCategoryQuery] = useState("");
   const pageSize = 9;
   const [isCatOpen, setIsCatOpen] = useState(false);
+  const [expandedCat, setExpandedCat] = useState<string | null>(null);
   const catRef = useRef<HTMLDivElement | null>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Subcategories data
+  const categorySubcategories: Record<string, string[]> = {
+    "อะไหล่เครื่องตัดหญ้า": [
+      "กระบอกเพลา", "ขาตั้งเครื่อง", "คลัชผ้า", "คอยล์ CDI", "คาร์บูเรเตอร์",
+      "จานเอ็นตัดหญ้า", "ชุดสตาร์ท", "ถังน้ำมัน", "ถ้วยคลัช", "ถ้วยยึดใบมีด",
+      "ที่กันหญ้า", "ท่อไอเสีย", "ที่ล็อคเพลา", "น็อตเกลียวซ้าย", "ปะเก็นชุด",
+      "มือเร่งพร้อมสวิทช์", "สกรูเกลียวซ้าย", "สายข้ออ่อน", "สายคันเร่ง",
+      "สายสะพาย", "สายเอ็นตัดหญ้า", "อุปกรณ์ป้องกัน", "หน้าแปลนกกหาง",
+      "หม้อกรองอากาศ", "หัวเกียร์", "หัวเทียน TTK", "หูเกี่ยวสายสะพาย",
+      "เสื้อสูบ+ชุดลูกสูบ", "แกนเพลา", "ใบมีดตัดหญ้า"
+    ],
+  };
 
   // Get current page and category from URL params
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
@@ -331,49 +345,119 @@ function ProductsContent() {
 
             {isCatOpen && (
               <div className="absolute z-50 mt-2 w-full rounded-2xl border border-gray-200 bg-white shadow-lg">
-                <div className="p-2">
+                {/* <div className="p-2">
                   <input
                     value={categoryQuery}
                     onChange={(e) => setCategoryQuery(e.target.value)}
-                    placeholder="ค้นหาหมวดหมู่..."
+                    placeholder="ค้นหาหมวดหมู่หรือสินค้า..."
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-[#21286E]"
                     onKeyDown={(e) => e.key === "Escape" && setIsCatOpen(false)}
                     autoFocus
                   />
-                </div>
-                <div className="max-h-64 overflow-auto p-1">
-                  {filteredCategories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => {
-                        setSelectedCategory(cat);
-                        setIsCatOpen(false);
-                        setCategoryQuery("");
-                        // Update URL with new category (clear subcategory when changing category)
-                        const params = new URLSearchParams();
-                        params.set("page", "1");
-                        if (cat !== "ทั้งหมด") {
-                          params.set("category", cat);
-                        }
-                        if (search.trim()) {
-                          params.set("search", search);
-                        }
-                        router.push(`/products?${params.toString()}`);
-                      }}
-                      className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-50 ${
-                        selectedCategory === cat
-                          ? "bg-gray-100 font-semibold"
-                          : ""
-                      }`}
-                      role="option"
-                      aria-selected={selectedCategory === cat}
-                    >
-                      <span className="truncate">{cat}</span>
-                      {selectedCategory === cat && (
-                        <span className="text-[#21286E]">✓</span>
+                </div> */}
+                <div className="max-h-96 overflow-auto p-1">
+                  {filteredCategories.map((cat) => {
+                    // Filter subcategories based on search query
+                    const filteredSubcats = categorySubcategories[cat]
+                      ? categorySubcategories[cat].filter((subcat) =>
+                          subcat.toLowerCase().includes(categoryQuery.toLowerCase())
+                        )
+                      : [];
+
+                    // Show category if it matches OR if any subcategory matches
+                    const showCategory = cat.toLowerCase().includes(categoryQuery.toLowerCase()) || filteredSubcats.length > 0;
+
+                    if (!showCategory) return null;
+
+                    return (
+                    <div key={cat} className="space-y-1">
+                      {/* Category Button */}
+                      <div className="flex items-center justify-between">
+                        <button
+                          onClick={() => {
+                            setSelectedCategory(cat);
+                            setIsCatOpen(false);
+                            setCategoryQuery("");
+                            // Update URL with new category (clear subcategory when changing category)
+                            const params = new URLSearchParams();
+                            params.set("page", "1");
+                            if (cat !== "ทั้งหมด") {
+                              params.set("category", cat);
+                            }
+                            if (search.trim()) {
+                              params.set("search", search);
+                            }
+                            router.push(`/products?${params.toString()}`);
+                          }}
+                          className={`flex-1 flex items-center justify-between rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-50 ${
+                            selectedCategory === cat
+                              ? "bg-gray-100 font-semibold"
+                              : ""
+                          }`}
+                          role="option"
+                          aria-selected={selectedCategory === cat}
+                        >
+                          <span className="truncate">{cat}</span>
+                          {selectedCategory === cat && (
+                            <span className="text-[#21286E]">✓</span>
+                          )}
+                        </button>
+                        {/* Expand/Collapse for subcategories */}
+                        {categorySubcategories[cat] && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setExpandedCat(expandedCat === cat ? null : cat);
+                            }}
+                            className="p-2 hover:bg-gray-50 rounded-lg"
+                          >
+                            <svg
+                              className={`w-4 h-4 transition-transform ${
+                                expandedCat === cat ? "rotate-180" : ""
+                              }`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Subcategories */}
+                      {categorySubcategories[cat] && (expandedCat === cat || filteredSubcats.length > 0) && (
+                        <div className="pl-6 space-y-1">
+                          {(categoryQuery ? filteredSubcats : categorySubcategories[cat]).map((subcat) => (
+                            <button
+                              key={subcat}
+                              onClick={() => {
+                                setIsCatOpen(false);
+                                setCategoryQuery("");
+                                // Navigate to subcategory filter
+                                const params = new URLSearchParams();
+                                params.set("page", "1");
+                                params.set("subcategory", subcat);
+                                if (search.trim()) {
+                                  params.set("search", search);
+                                }
+                                router.push(`/products?${params.toString()}`);
+                              }}
+                              className="w-full text-left px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-lg"
+                            >
+                              {subcat}
+                            </button>
+                          ))}
+                        </div>
                       )}
-                    </button>
-                  ))}
+                    </div>
+                    );
+                  })}
                   {filteredCategories.length === 0 && (
                     <div className="px-3 py-6 text-center text-sm text-gray-500">
                       ไม่พบหมวดหมู่ที่ค้นหา
