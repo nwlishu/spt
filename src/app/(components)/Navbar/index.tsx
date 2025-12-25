@@ -10,6 +10,8 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [isMobileProductOpen, setIsMobileProductOpen] = useState(false);
+  const [mobileExpandedCategory, setMobileExpandedCategory] = useState<number | null>(null);
 
   // Dropdown menu data structure
   const dropdownMenuData = [
@@ -100,7 +102,8 @@ const Navbar: React.FC = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isMenuOpen &&
-        !(event.target as Element).closest(".navbar-container")
+        !(event.target as Element).closest(".navbar-container") &&
+        !(event.target as Element).closest(".mobile-menu")
       ) {
         setIsMenuOpen(false);
       }
@@ -290,11 +293,11 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden`}
+          className={`mobile-menu lg:hidden transition-all duration-300 ease-in-out ${
+            isMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          } overflow-y-auto`}
         >
-          <div className="bg-background border-t border-border py-4 space-y-4">
+          <div className="bg-background border-t border-border py-4 space-y-4 px-6">
             <Link
               href="/"
               className="block text-[#21286E] hover:text-blue-600 transition-colors font-bold py-2"
@@ -309,13 +312,114 @@ const Navbar: React.FC = () => {
             >
               เกี่ยวกับเรา
             </Link>
-            <Link
-              href="/products"
-              className="block text-[#21286E] hover:text-blue-600 transition-colors font-bold py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              สินค้า
-            </Link>
+
+            {/* Mobile Products Dropdown */}
+            <div className="space-y-2">
+              <button
+                onClick={() => setIsMobileProductOpen(!isMobileProductOpen)}
+                className="w-full flex items-center justify-between text-[#21286E] hover:text-blue-600 transition-colors font-bold py-2"
+              >
+                <span>สินค้า</span>
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isMobileProductOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Categories List */}
+              <div
+                className={`transition-all duration-300 ease-in-out ${
+                  isMobileProductOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                } overflow-hidden`}
+              >
+                <div className="pl-4 space-y-2">
+                  {dropdownMenuData.map((category, categoryIndex) => (
+                    <div key={categoryIndex} className="space-y-1">
+                      {/* Category Row */}
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href={`/products?page=1&category=${encodeURIComponent(
+                            category.title
+                          )}`}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex-1 text-[#21286E] hover:text-blue-600 py-2 text-sm font-semibold"
+                        >
+                          {category.title}
+                        </Link>
+                        {category.items.length > 0 && (
+                          <button
+                            onClick={() =>
+                              setMobileExpandedCategory(
+                                mobileExpandedCategory === categoryIndex
+                                  ? null
+                                  : categoryIndex
+                              )
+                            }
+                            className="p-2 text-[#21286E] hover:text-blue-600"
+                          >
+                            <svg
+                              className={`w-4 h-4 transition-transform duration-200 ${
+                                mobileExpandedCategory === categoryIndex
+                                  ? "rotate-180"
+                                  : ""
+                              }`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Subcategories */}
+                      {category.items.length > 0 && (
+                        <div
+                          className={`transition-all duration-300 ease-in-out ${
+                            mobileExpandedCategory === categoryIndex
+                              ? "max-h-[500px] opacity-100"
+                              : "max-h-0 opacity-0"
+                          } overflow-y-auto`}
+                        >
+                          <div className="pl-4 space-y-1">
+                            {category.items.map((item, itemIndex) => (
+                              <Link
+                                key={itemIndex}
+                                href={`/products?page=1&subcategory=${encodeURIComponent(
+                                  item.label
+                                )}`}
+                                className="block text-gray-600 hover:text-blue-600 py-1.5 text-xs"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Link href="/contact">
               <button className="w-full bg-indigo-900 text-white px-6 py-3 rounded-full hover:bg-indigo-800 transition-colors">
                 ติดต่อเรา
