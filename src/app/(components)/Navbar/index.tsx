@@ -224,19 +224,18 @@ const Navbar: React.FC = () => {
                           >
                             {dropdownMenuData[selectedCategory].title}
                           </Link>
-                          <ul className="grid grid-cols-2 gap-x-8 gap-y-2 mb-4">
+                          <div className="columns-2 gap-x-8 mb-4">
                             {dropdownMenuData[selectedCategory].items.map((item, itemIndex) => (
-                              <li key={itemIndex}>
-                                <Link
-                                  href={`/products?page=1&subcategory=${encodeURIComponent(item.label)}`}
-                                  className="text-muted-foreground hover:text-blue-600 transition-colors text-sm block"
-                                  onClick={() => setIsProductOpen(false)}
-                                >
-                                  {item.label}
-                                </Link>
-                              </li>
+                              <Link
+                                key={itemIndex}
+                                href={`/products?page=1&subcategory=${encodeURIComponent(item.label)}`}
+                                className="text-muted-foreground hover:text-blue-600 transition-colors text-sm block py-1"
+                                onClick={() => setIsProductOpen(false)}
+                              >
+                                {item.label}
+                              </Link>
                             ))}
-                          </ul>
+                          </div>
 
                           {/* View All Button */}
                           {/* <div className="flex justify-end mt-6">
