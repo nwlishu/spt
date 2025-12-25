@@ -431,9 +431,9 @@ function ProductsContent() {
                       </div>
 
                       {/* Subcategories */}
-                      {categorySubcategories[cat] && (expandedCat === cat || filteredSubcats.length > 0) && (
+                      {categorySubcategories[cat] && (expandedCat === cat || (categoryQuery.trim() && filteredSubcats.length > 0)) && (
                         <div className="pl-6 space-y-1">
-                          {(categoryQuery ? filteredSubcats : categorySubcategories[cat]).map((subcat) => (
+                          {(categoryQuery.trim() ? filteredSubcats : categorySubcategories[cat]).map((subcat) => (
                             <button
                               key={subcat}
                               onClick={() => {
